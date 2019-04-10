@@ -3,4 +3,30 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <color name="colorYellow">#FDD835</color>
+    <color name="colorGreen">#0CD10C</color>
+    <color name="colorWhite">#F7F7F7</color>
+    <color name="colorButtonBeli">#D19402</color>
+
+    <color name="colorBackground">#323031</color>
+
+    <color name="colorBottomNav">#24CD6C</color>
+    <color name="colorBlue">#4DA1AB</color>
+
+    <color name="colorInformation">#E5FAAF</color>
+    <color name="colorBookingCardView">#CFC7C7</color>
+
+    <color name="colorDateCardView">#D19402</color>
+    <color name="colorBookingRed">#D64D24</color>
+
+    <color name="colorOrange">#FE923E</color>
+    
+    //ButtonBooking
+    <color name="colorBookingCancel">#D1021F</color>
+    <color name="colorBookingSimpan">#D19402</color>
+
+    <color name="colorBackgroundLogoYulia">#484848</color>
+    <color name="colorRegister">#979694</color>
 </resources>

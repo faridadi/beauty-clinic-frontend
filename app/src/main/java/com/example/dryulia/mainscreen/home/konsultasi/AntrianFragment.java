@@ -1,4 +1,4 @@
-package com.example.dryulia.mainscreen.message;
+package com.example.dryulia.mainscreen.home.konsultasi;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,21 +11,26 @@ import android.view.ViewGroup;
 import com.example.dryulia.R;
 
 
-public class MessageFragment extends Fragment {
+public class AntrianFragment extends Fragment {
 
-    private View view;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
 
-    }
+        }
+
+        }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_message, container, false);
-        return view; }
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_antrian, container, false);
+    }
+
 }
-
-
 

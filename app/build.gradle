@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.dryulia"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -29,4 +29,18 @@ dependencies {
 
     //design
     implementation 'com.android.support:design:28.0.0'
+
+    //courosel
+    implementation 'com.synnapps:carouselview:0.1.4'
+
+    //slider image
+    implementation 'com.github.smarteist:autoimageslider:1.2.0'
+
+    //take image from inet
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+
+    //gridlayout
+    implementation 'com.android.support:gridlayout-v7:28.0.0'
+
+
 }

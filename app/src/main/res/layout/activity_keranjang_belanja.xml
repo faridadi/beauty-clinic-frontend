@@ -1,47 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mainscreen.event.EventFragment"
-    android:background="@color/colorBackground">
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context=".mainscreen.home.beautyproduct.KeranjangBelanjaActivity">
 
-    <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_event"/>
+        tools:listitem="@layout/item_keranjang_belanja"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:padding="15dp">
+        android:background="@color/colorBackground"
+        android:padding="10dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="50dp">
+            android:layout_marginLeft="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sub Total: "
+                android:textSize="15sp"
                 android:textColor="@color/colorWhite"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rp. "
+                android:textSize="15sp"
                 android:textColor="@color/colorGreen"
                 />
             <TextView
                 android:id="@+id/subtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rp 936.000"
+                android:text="936.000"
+                android:textSize="15sp"
                 android:textColor="@color/colorGreen"/>
 
         </LinearLayout>
@@ -58,5 +62,4 @@
             android:layout_centerInParent="true"
             android:layout_marginRight="30dp"/>
     </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>

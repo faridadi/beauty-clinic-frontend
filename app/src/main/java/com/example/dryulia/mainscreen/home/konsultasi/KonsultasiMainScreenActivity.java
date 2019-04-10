@@ -1,4 +1,5 @@
-package com.example.dryulia.mainscreen;
+
+package com.example.dryulia.mainscreen.home.konsultasi;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,22 +15,22 @@ import com.example.dryulia.mainscreen.home.HomeFragment;
 import com.example.dryulia.mainscreen.message.MessageFragment;
 import com.example.dryulia.mainscreen.profile.ProfileFragment;
 
-public class MainScreenActivity extends AppCompatActivity {
+public class KonsultasiMainScreenActivity extends AppCompatActivity {
 
     public BottomNavigationView bottomNavigationView;
     private Fragment selectedFragment;
-    private static MainScreenActivity mainScreenActivity;
+    private static KonsultasiMainScreenActivity konsultasiMainScreenActivity;
     public static int selectedMenuId;
 
-    public static MainScreenActivity getInstance() {
-        return mainScreenActivity;
+    public static KonsultasiMainScreenActivity getInstance() {
+        return konsultasiMainScreenActivity;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_screen);
-        mainScreenActivity = this;
+        setContentView(R.layout.activity_konsultasi_main_screen);
+        konsultasiMainScreenActivity = this;
 
         selectedMenuId = R.id.menu_home;
 
@@ -83,4 +84,5 @@ public class MainScreenActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(selectedMenuId);
         super.onStart();
     }
-}
+    }
+
