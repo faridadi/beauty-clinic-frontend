@@ -25,8 +25,10 @@
     
     //ButtonBooking
     <color name="colorBookingCancel">#D1021F</color>
-    <color name="colorBookingSimpan">#D19402</color>
+    <color name="colorBookingNext">#D19402</color>
 
     <color name="colorBackgroundLogoYulia">#484848</color>
     <color name="colorRegister">#979694</color>
+
+
 </resources>

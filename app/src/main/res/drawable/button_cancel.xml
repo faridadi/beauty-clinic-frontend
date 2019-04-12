@@ -8,5 +8,5 @@
         </shape>
     </item>
 
-    <item android:drawable="@drawable/rounded_button_red" />
+    <item android:drawable="@drawable/rounded_button_yellow" />
 </ripple>

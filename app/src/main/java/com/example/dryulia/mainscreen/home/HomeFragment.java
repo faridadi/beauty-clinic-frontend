@@ -13,8 +13,9 @@ import android.widget.Toast;
 
 import com.example.dryulia.R;
 import com.example.dryulia.mainscreen.MainScreenActivity;
-import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiMainScreenActivity;
-import com.example.dryulia.mainscreen.home.konsultasi.PilihLayananFragment;
+import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
+import com.example.dryulia.mainscreen.home.produk.ProdukFragment;
+import com.example.dryulia.mainscreen.home.treatment.TreatmentFragment;
 
 
 public class HomeFragment extends Fragment {
@@ -53,11 +54,9 @@ public class HomeFragment extends Fragment {
                 fr.replace(R.id.con, new PilihLayananFragment());
                 fr.commit();*/
 
-                Intent i = new Intent(getActivity(), KonsultasiMainScreenActivity.class);
-                startActivity(i);
-
-
-
+                Fragment konsultasiFragment = new KonsultasiFragment();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, konsultasiFragment).commit();
 
 
             }
@@ -67,6 +66,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Anda Memilih Treatment", Toast.LENGTH_SHORT).show();
+
+                Fragment treatmentFragment = new TreatmentFragment();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, treatmentFragment).commit();
             }
         });
 
@@ -74,6 +77,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Anda Memilih Produk", Toast.LENGTH_SHORT).show();
+                Fragment produkFragment = new ProdukFragment();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, produkFragment).commit();
             }
         });
 

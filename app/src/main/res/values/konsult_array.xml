@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="status_konst">
+        <item>Pilih Layana</item>
+        <item>Kondisi Umum</item>
+        <item>Booking</item>
+        <item>Antrian</item>
+    </string-array>
+</resources>

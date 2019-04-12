@@ -1,4 +1,4 @@
-package com.example.dryulia.mainscreen.profile;
+package com.example.dryulia.mainscreen.home.bill;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.dryulia.R;
 
-public class ProfileFragment extends Fragment {
+
+public class BillFragment extends Fragment {
 
 
 
@@ -25,9 +26,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_bill, container, false);
     }
-
 
 
     @Override

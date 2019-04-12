@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBookingSimpan"
+    android:background="@color/colorBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mainscreen.home.HomeFragment"
-    android:id="@+id/con">
+    android:id="@+id/container_home">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

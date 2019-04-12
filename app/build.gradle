@@ -42,5 +42,15 @@ dependencies {
     //gridlayout
     implementation 'com.android.support:gridlayout-v7:28.0.0'
 
+    //komuniasi fragment <-> activity
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //autoscalable sp dan dp
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    
+    //stepview android
+    implementation 'com.params.stepview:stepview:1.0.1'
+
 
 }
