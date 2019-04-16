@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingRight="5dp"
     android:paddingLeft="5dp"
@@ -10,17 +10,15 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="20dp"
+        app:cardCornerRadius="@dimen/_10sdp"
         android:backgroundTint="@color/colorWhite"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/_10sdp"
         >
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="20dp"
-            android:layout_margin="2dp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            android:layout_margin="@dimen/_2sdp"
             android:backgroundTint="@color/colorBackground"
             >
 
@@ -28,18 +26,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/_10sdp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="100dp"
+                        android:id="@+id/iv_produk"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_100sdp"
                         android:src="@drawable/img_facialc_cleanser"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_gravity="center"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"
@@ -47,7 +48,7 @@
                             android:text="Rp. "
                             android:textColor="@color/colorGreen"/>
                         <TextView
-                            android:id="@+id/harga_produk"
+                            android:id="@+id/tv_hargaProduk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="136.000"
@@ -63,45 +64,126 @@
                     android:orientation="vertical"
                     android:paddingLeft="5dp">
                     <TextView
-                        android:id="@+id/nama_produk"
+                        android:id="@+id/tv_namaProduk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="FACIAL CLEANSER PEMUTIH KULIT WAJAH ALAMAI/Produk Kecantikan"
                         android:textColor="@color/colorWhite"
-                        android:textSize="15sp"/>
+                        android:textSize="@dimen/_12ssp"/>
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="horizontal">
                         <TextView
-                            android:id="@+id/penjelasan_produk"
-                            android:layout_width="180dp"
-                            android:layout_height="80dp"
+                            android:id="@+id/tv_detailProduk"
+                            android:layout_width="@dimen/_90sdp"
+                            android:layout_height="@dimen/_80sdp"
+                            android:textSize="@dimen/_9ssp"
                             android:text="nkjnkdalksndalksndlaknsdlansdlaksndlkasndlkasndlaksndsndjnksafbdskajdakdksadbkasdbaksdbkasjbdakjsbdkajsbdka"
                             android:textColor="@color/colorWhite"
-                            android:paddingRight="20dp"
+                            android:paddingRight="@dimen/_9sdp"
+                            android:layout_weight="1"
                             />
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <Button
-                                android:id="@+id/button_hapus"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""/>
-                            <Button
-                                android:id="@+id/button_indecrease"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Order"/>
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="right">
+                            <android.support.v7.widget.CardView
+                                android:layout_width="@dimen/_68sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_columnWeight="1"
+                                android:layout_marginBottom="@dimen/_6sdp"
+                                android:layout_row="0"
+                                android:layout_column="0"
+                                app:cardCornerRadius="@dimen/_5sdp"
+                                android:backgroundTint="@color/colorGreen">
+                                <android.support.v7.widget.CardView
+                                    android:id="@+id/cv_konsultasi"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_columnWeight="1"
+                                    app:cardCornerRadius="@dimen/_5sdp"
+                                    android:backgroundTint="@color/colorBackground"
+                                    android:layout_margin="1dp"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingTop="@dimen/_5sdp"
+                                        android:gravity="center"
+                                        android:paddingBottom="@dimen/_5sdp">
+                                        <ImageView
+                                            android:id="@+id/ic_produk_minus"
+                                            android:layout_width="@dimen/_12sdp"
+                                            android:layout_height="@dimen/_12sdp"
+                                            android:layout_gravity="center"
+                                            android:layout_marginLeft="@dimen/_3sdp"
+                                            android:layout_marginRight="@dimen/_3sdp"
+                                            android:src="@drawable/ic_remove_black_24dp"/>
+                                        <TextView
+                                            android:id="@+id/tv_jumlahProduk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/colorWhite"
+                                            android:text="1"
+                                            android:gravity="center"
+                                            android:paddingLeft="@dimen/_10sdp"
+                                            android:paddingRight="@dimen/_10sdp"
+                                            />
+                                        <ImageView
+                                            android:id="@+id/ic_produk_add"
+                                            android:layout_width="@dimen/_12sdp"
+                                            android:layout_height="@dimen/_12sdp"
+                                            android:layout_marginLeft="@dimen/_3sdp"
+                                            android:layout_marginRight="@dimen/_3sdp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_add_black_24dp"/>
+                                    </LinearLayout>
 
+                                </android.support.v7.widget.CardView>
+                            </android.support.v7.widget.CardView>
+                            <android.support.v7.widget.CardView
+                                android:layout_width="@dimen/_68sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_columnWeight="1"
+                                android:layout_marginBottom="@dimen/_6sdp"
+                                android:layout_row="0"
+                                android:layout_column="0"
+                                app:cardCornerRadius="@dimen/_5sdp"
+                                android:backgroundTint="@color/colorGreen">
+                                <android.support.v7.widget.CardView
+                                    android:id="@+id/btn_order"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_columnWeight="1"
+                                    app:cardCornerRadius="@dimen/_5sdp"
+                                    android:backgroundTint="@color/colorBackground"
+                                    android:layout_margin="@dimen/_1sdp"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingTop="@dimen/_3sdp"
+                                        android:gravity="center"
+                                        android:paddingBottom="@dimen/_5sdp">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/colorWhite"
+                                            android:text="Order"
+
+                                            android:gravity="center"
+                                            />
+                                    </LinearLayout>
+                                </android.support.v7.widget.CardView>
+                            </android.support.v7.widget.CardView>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-
             </LinearLayout>
-
         </android.support.v7.widget.CardView>
     </android.support.v7.widget.CardView>
 

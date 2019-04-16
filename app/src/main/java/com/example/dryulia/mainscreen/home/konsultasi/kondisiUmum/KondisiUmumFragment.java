@@ -1,6 +1,7 @@
-package com.example.dryulia.mainscreen.home.konsultasi;
+package com.example.dryulia.mainscreen.home.konsultasi.kondisiUmum;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.dryulia.R;
+import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
 
 public class KondisiUmumFragment extends Fragment {
 
@@ -41,11 +43,18 @@ public class KondisiUmumFragment extends Fragment {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment bookingFragment = new BookingFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.add(R.id.content_konsultasi, bookingFragment).commit();
+                KonsultasiFragment.getInstance().setStep(2);
             }
         });
 
+    }
+    //check the device has camera
+    private boolean checkCameraHardware(Context context){
+        if(context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+            //the device has camera
+            return true;
+        }else {
+            return false;
+        }
     }
 }

@@ -9,6 +9,8 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dryulia.R;
@@ -16,9 +18,14 @@ import com.example.dryulia.mainscreen.MainScreenActivity;
 import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
 import com.example.dryulia.mainscreen.home.produk.ProdukFragment;
 import com.example.dryulia.mainscreen.home.treatment.TreatmentFragment;
+import com.smarteist.autoimageslider.SliderLayout;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 
 public class HomeFragment extends Fragment {
+
+    CarouselView carouselView;
 
         private View view;
         CardView cvKonsultasi, cvTreatment, cvProduk, cvMedicalAdvice,cvBill, cvRekamMedis;
@@ -33,7 +40,14 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final int[] sampleImages = {R.drawable.img_promo, R.drawable.img_diskon_1, R.drawable.img_diskon_2, R.drawable.img_diskon_3};
+
         view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        carouselView = view.findViewById(R.id.carouselView);
+        carouselView.setPageCount(sampleImages.length);
+
+
         cvKonsultasi = view.findViewById(R.id.cv_konsultasi);
         cvTreatment = view.findViewById(R.id.cv_treatment);
         cvProduk = view.findViewById(R.id.cv_produk);
@@ -41,6 +55,13 @@ public class HomeFragment extends Fragment {
         cvBill = view.findViewById(R.id.cv_bill);
         cvRekamMedis = view.findViewById(R.id.cv_rekamMedis);
 
+        ImageListener imageListener = new ImageListener() {
+            @Override
+            public void setImageForPosition(int position, ImageView imageView) {
+                imageView.setImageResource(sampleImages[position]);
+            }
+        };
+        carouselView.setImageListener(imageListener);
 
 
         cvKonsultasi.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +140,7 @@ public class HomeFragment extends Fragment {
 
 
         }
+
 
     }
 

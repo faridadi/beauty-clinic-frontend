@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingRight="5dp"
-    android:paddingLeft="5dp"
-    android:paddingTop="5dp">
+    android:paddingRight="@dimen/_3sdp"
+    android:paddingLeft="@dimen/_3sdp"
+    android:paddingTop="@dimen/_3sdp">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cv_treatment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="20dp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_20sdp"
         android:backgroundTint="@color/colorWhite"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/_10sdp"
         >
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="20dp"
-            android:layout_margin="2dp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="@dimen/_20sdp"
+            android:layout_margin="@dimen/_2sdp"
             android:backgroundTint="@color/colorBackground"
             >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="@dimen/_10sdp">
                 <TextView
-                    android:id="@+id/cv_treatment_judul"
+                    android:id="@+id/tv_treatment_judul"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Hand-rejuvenation"
                     android:textColor="@color/colorWhite"
-                    android:textSize="20sp"/>
+                    android:textSize="@dimen/_18ssp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -47,8 +48,8 @@
                         android:orientation="vertical">
                         <ImageView
                             android:id="@+id/iv_treatment"
-                            android:layout_width="130dp"
-                            android:layout_height="90dp"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_70sdp"
                             android:src="@drawable/img_treatment"
                             android:layout_gravity="left"/>
                         <LinearLayout
@@ -59,55 +60,44 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="15sp"
+                                android:textSize="@dimen/_15ssp"
                                 android:text="Rp. "
                                 android:textColor="@color/colorGreen"/>
                             <TextView
+                                android:id="@+id/tv_harga_treatment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="15sp"
-                                android:text="120.000"
+                                android:textSize="@dimen/_13ssp"
+                                android:text="120000"
                                 android:textColor="@color/colorGreen"
                                 />
                         </LinearLayout>
-
-
-
-
                     </LinearLayout>
-                    <TextView
-                        android:id="@+id/tv_treatment_keterangan"
-                        android:layout_width="180dp"
-                        android:layout_height="90dp"
-                        android:text="@string/dummy_treatment_text"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorWhite"
-                        android:paddingLeft="10dp"
-                        />
-                    <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/ic_treatment_false"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="15dp"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/tv_treatment_keterangan"
+                            android:layout_width="@dimen/_110sdp"
+                            android:layout_height="@dimen/_90sdp"
+                            android:text="@string/dummy_treatment_text"
+                            android:textSize="@dimen/_10ssp"
+                            android:textColor="@color/colorWhite"
+                            android:layout_alignParentLeft="true"/>                            />
+                        <ImageView
+                            android:id="@+id/iv_treatment_status"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:src="@drawable/ic_treatment_false"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            />
 
+                    </RelativeLayout>
 
                 </LinearLayout>
-
-
-
-                <!--<LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-
-                </LinearLayout>-->
-
-
-
             </LinearLayout>
-
         </android.support.v7.widget.CardView>
     </android.support.v7.widget.CardView>
 

@@ -44,17 +44,13 @@ public class BookingFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment antrianFragment = new AntrianFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.add(R.id.content_konsultasi, antrianFragment).commit();
+                KonsultasiFragment.getInstance().setStep(3);
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment kondisiUmumFragment = new KondisiUmumFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.add(R.id.content_konsultasi, kondisiUmumFragment).commit();
+                KonsultasiFragment.getInstance().setStep(1);
             }
         });
     }

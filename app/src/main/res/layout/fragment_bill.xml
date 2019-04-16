@@ -21,8 +21,8 @@
             android:orientation="horizontal"
             android:gravity="center">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:src="@drawable/ic_spa"
                 android:layout_gravity="center"
                 />
@@ -31,9 +31,9 @@
                 android:layout_height="wrap_content"
                 android:text="Treatment"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp"
+                android:textSize="@dimen/_20ssp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="@dimen/_5sdp"/>
 
         </LinearLayout>
     </Toolbar>
@@ -47,18 +47,18 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="20dp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_20sdp"
             android:backgroundTint="@color/colorWhite"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/_5sdp"
 
             >
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cardCornerRadius="8dp"
-            app:cardElevation="20dp"
-            android:layout_margin="2dp"
+            app:cardElevation="@dimen/_20sdp"
+            android:layout_margin="@dimen/_2sdp"
             android:backgroundTint="@color/colorBackground"
             >
 
@@ -73,34 +73,34 @@
                     android:text="Jadwal Treatment"
                     android:textColor="@color/colorWhite"
                     android:gravity="center"
-                    android:textSize="30sp"/>
+                    android:textSize="@dimen/_30ssp"/>
                 <LinearLayout
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
                         android:src="@drawable/ic_calendar_white"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginLeft="@dimen/_10sdp"/>
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="20dp"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="@dimen/_20sdp"
                         android:backgroundTint="@color/colorWhite"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_20sdp"
                         >
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="20dp"
-                        android:layout_margin="2dp"
+                        app:cardCornerRadius="@dimen/_8sdp"
+                        app:cardElevation="@dimen/_20sdp"
+                        android:layout_margin="@dimen/_2sdp"
                         android:backgroundTint="@color/colorBackground"
                         >
                         <TextView
@@ -108,11 +108,11 @@
                             android:layout_height="wrap_content"
                             android:text="Tanggal/Bulan/Tahun"
                             android:textColor="@color/colorWhite"
-                            android:textSize="20sp"
+                            android:textSize="@dimen/_20ssp"
                             android:layout_gravity="center"
                             android:alpha=".50"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"/>
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_10sdp"/>
                     </android.support.v7.widget.CardView>
                     </android.support.v7.widget.CardView>
                 </LinearLayout>
@@ -121,12 +121,12 @@
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:src="@color/colorWhite"
                     android:layout_width="match_parent"
-                    android:layout_height="3dp"
+                    android:layout_height="@dimen/_3sdp"
                     android:scaleType="fitXY"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:paddingTop="2dp"
-                    android:layout_marginTop="10dp"/>
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_10sdp"/>
             </LinearLayout>
 
             <ScrollView

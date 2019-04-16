@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">DrYulia</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -7,4 +6,5 @@
     <string name="dummy_booking_information">Dimohon untuk hadir sesuai tanggal booking dan segera melakukan konfirmasi pada admin untuk mendapatkan nomor antrian</string>
     <string name="dummy_booking_antrian">Sistem otomatis melewati no antrian anda. Apabila dalam waktu 30 detik anda tidak hadir </string>
     <string name="dummy_treatment_text">Rejuvenation merupakan perawatan kulit tubuh menggunakan teknologi berbasis cahaya yang bekerja pada lapisan kulit epidermis dan dermis </string>
+    <string name="take_picture">Take picture</string>
 </resources>

@@ -7,7 +7,9 @@
     android:background="@color/colorBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mainscreen.home.konsultasi.BookingFragment">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,21 +18,21 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            app:cardCornerRadius="10dp">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_10sdp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="10dp">
+                android:paddingTop="@dimen/_2sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="10dp"
+                    android:paddingTop="@dimen/_1sdp"
                     >
                     <LinearLayout
                         android:id="@+id/hehe"
@@ -42,7 +44,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Booking Code"
-                            android:textSize="18sp"
+                            android:textSize="@dimen/_13ssp"
                             android:layout_gravity="center"
                             android:textColor="@color/colorOrange"/>
                         <android.support.v7.widget.CardView
@@ -50,7 +52,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorBookingCardView"
-                            app:cardCornerRadius="5dp"
+                            app:cardCornerRadius="@dimen/_5sdp"
                             android:layout_gravity="center"
 
 
@@ -59,12 +61,12 @@
                                 android:id="@+id/booking_status_code"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingRight="40dp"
-                                android:paddingLeft="40dp"
-                                android:paddingTop="10dp"
+                                android:paddingRight="@dimen/_40sdp"
+                                android:paddingLeft="@dimen/_40sdp"
+                                android:paddingTop="@dimen/_10sdp"
                                 android:gravity="center"
-                                android:paddingBottom="10dp"
-                                android:textSize="18sp"
+                                android:paddingBottom="@dimen/_10sdp"
+                                android:textSize="@dimen/_13ssp"
                                 android:text="Aktif" />
                         </android.support.v7.widget.CardView>
                     </LinearLayout>
@@ -72,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="@dimen/_10sdp"
                         android:layout_weight="1"
                         >
                         <TextView
@@ -80,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:text="Booking Number"
                             android:gravity="center"
-                            android:textSize="18sp"
+                            android:textSize="@dimen/_13ssp"
                             android:textColor="@color/colorOrange"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -94,18 +96,18 @@
                                 android:layout_height="wrap_content"
                                 android:text="0"
                                 android:backgroundTint="@color/colorBookingCardView"
-                                app:cardCornerRadius="5dp"
-                                android:layout_marginRight="5dp"
+                                app:cardCornerRadius="@dimen/_5sdp"
+                                android:layout_marginRight="@dimen/_5sdp"
                                 >
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="0"
-                                    android:textSize="18sp"
-                                    android:paddingTop="10dp"
-                                    android:paddingBottom="10dp"
-                                    android:paddingLeft="15dp"
-                                    android:paddingRight="15dp"/>
+                                    android:textSize="@dimen/_13ssp"
+                                    android:paddingTop="@dimen/_10sdp"
+                                    android:paddingBottom="@dimen/_10sdp"
+                                    android:paddingLeft="@dimen/_15sdp"
+                                    android:paddingRight="@dimen/_15sdp"/>
                             </android.support.v7.widget.CardView>
 
                             <android.support.v7.widget.CardView
@@ -114,17 +116,17 @@
                                 android:layout_height="wrap_content"
                                 android:text="0"
                                 android:backgroundTint="@color/colorBookingCardView"
-                                app:cardCornerRadius="5dp"
-                                android:layout_marginRight="5dp">
+                                app:cardCornerRadius="@dimen/_5sdp"
+                                android:layout_marginRight="@dimen/_5sdp">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="0"
-                                    android:textSize="18sp"
-                                    android:paddingTop="10dp"
-                                    android:paddingBottom="10dp"
-                                    android:paddingLeft="15dp"
-                                    android:paddingRight="15dp"
+                                    android:textSize="@dimen/_13ssp"
+                                    android:paddingTop="@dimen/_10sdp"
+                                    android:paddingBottom="@dimen/_10sdp"
+                                    android:paddingLeft="@dimen/_15sdp"
+                                    android:paddingRight="@dimen/_15sdp"
                                     />
                             </android.support.v7.widget.CardView>
 
@@ -134,16 +136,16 @@
                                 android:layout_height="wrap_content"
                                 android:text="0"
                                 android:backgroundTint="@color/colorBookingCardView"
-                                app:cardCornerRadius="5dp">
+                                app:cardCornerRadius="@dimen/_5sdp">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="0"
-                                    android:textSize="18sp"
-                                    android:paddingTop="10dp"
-                                    android:paddingBottom="10dp"
-                                    android:paddingLeft="15dp"
-                                    android:paddingRight="15dp"/>
+                                    android:textSize="@dimen/_13ssp"
+                                    android:paddingTop="@dimen/_10sdp"
+                                    android:paddingBottom="@dimen/_10sdp"
+                                    android:paddingLeft="@dimen/_15sdp"
+                                    android:paddingRight="@dimen/_15sdp"/>
                             </android.support.v7.widget.CardView>
                         </LinearLayout>
                     </LinearLayout>
@@ -152,16 +154,16 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="20dp"
-                    android:elevation="15dp">
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:elevation="@dimen/_15sdp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp">
                         <TextView
                             android:id="@+id/antrian_digit_3"
                             android:gravity="center"
@@ -169,7 +171,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:layout_weight="1"
-                            android:textSize="180sp"
+                            android:textSize="175sp"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/antrian_digit_2"
@@ -181,7 +183,7 @@
                             android:text="0"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textSize="180sp"
+                            android:textSize="175sp"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/antrian_digit_1"
@@ -194,7 +196,7 @@
                             android:gravity="center"
                             android:text="2"
                             android:layout_weight="1"
-                            android:textSize="180sp"
+                            android:textSize="175sp"
                             android:textStyle="bold"
                             />
                     </LinearLayout>
@@ -204,10 +206,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:textSize="15sp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:paddingLeft="@dimen/_20sdp"
+                    android:paddingRight="@dimen/_20sdp"
+                    android:textSize="@dimen/_13ssp"
                     android:text="@string/dummy_booking_antrian"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -215,16 +218,16 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            app:cardCornerRadius="5dp">
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_5sdp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:paddingLeft="@dimen/_20sdp"
+                android:paddingRight="@dimen/_20sdp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -232,13 +235,13 @@
                     android:text="Detail Pemesanan"
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
-                    android:textSize="15sp"/>
+                    android:textSize="@dimen/_13ssp"/>
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:src="@drawable/ic_folder"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_alignParentEnd="true"
                     />
             </RelativeLayout>
@@ -247,17 +250,17 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            app:cardCornerRadius="5dp">
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_5sdp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:paddingLeft="@dimen/_20sdp"
+                android:paddingRight="@dimen/_20sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -265,23 +268,19 @@
                     android:layout_alignParentStart="true"
                     android:text="Detail Kondisi Umum "
                     android:layout_centerInParent="true"
-                    android:textSize="15sp"/>
+                    android:textSize="@dimen/_13ssp"/>
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:src="@drawable/ic_folder" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-
-
-
-
-
     </LinearLayout>
+</ScrollView>
 
 
 </FrameLayout>

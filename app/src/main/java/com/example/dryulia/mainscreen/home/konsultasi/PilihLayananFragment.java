@@ -1,5 +1,6 @@
 package com.example.dryulia.mainscreen.home.konsultasi;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,20 +13,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.dryulia.R;
+
+import java.util.Calendar;
 
 
 public class PilihLayananFragment extends Fragment {
 
+    EditText edtKeluhan, edtAreaKeluhan, edtLamaKeluhan, edtRiwayatCream, edtRiwayatPerawatan;
+
 
     private View view;
-    Button btnSimpan;
+    private Button btnSimpan;
+    private ImageView imgTanggal;
+    private TextView tvTanggal;
+    Calendar c;
+    DatePickerDialog dpd;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         Log.i("makan","makan");
     }
@@ -40,12 +52,40 @@ public class PilihLayananFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         btnSimpan = view.findViewById(R.id.btn_simpan_pilihLayanan);
+        edtKeluhan = view.findViewById(R.id.edt_keluhan);
+        edtAreaKeluhan = view.findViewById(R.id.edt_area_keluhan);
+        edtLamaKeluhan = view.findViewById(R.id.edt_riwayat_cream);
+        edtRiwayatCream = view.findViewById(R.id.edt_riwayat_cream);
+        edtRiwayatPerawatan = view.findViewById(R.id.edt_riwayat_perawatan);
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment kondisiUmumFragment = new KondisiUmumFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.add(R.id.content_konsultasi, kondisiUmumFragment).commit();
+                KonsultasiFragment.getInstance().setsKeluhan(edtKeluhan.getText().toString());
+                KonsultasiFragment.getInstance().setsAreaKeluhan(edtAreaKeluhan.getText().toString());
+                KonsultasiFragment.getInstance().setsLamaKeluhan(edtLamaKeluhan.getText().toString());
+                KonsultasiFragment.getInstance().setsRiwayatCream(edtRiwayatCream.getText().toString());
+                KonsultasiFragment.getInstance().setsCalendar(c);
+               KonsultasiFragment.getInstance().setStep(1);
+            }
+        });
+        imgTanggal = view.findViewById(R.id.ic_calendar);
+        tvTanggal = view.findViewById(R.id.tv_tanggal_konsultasi);
+
+        imgTanggal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c = Calendar.getInstance();
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                int month = c.get(Calendar.MONTH);
+                int year = c.get(Calendar.YEAR);
+
+                dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
+                        tvTanggal.setText(mDay + "/"+(mMonth+1)+"/"+mYear);
+                    }
+                },day, month, year);
+                dpd.show();
             }
         });
 

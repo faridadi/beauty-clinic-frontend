@@ -11,28 +11,28 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="@dimen/_180sdp"
         android:src="@drawable/logo_yulia"
         android:layout_gravity="center"
-        android:background="@color/colorBackgroundLogoYulia"
+        android:layout_marginRight="5dp"
         />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="20dp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_20sdp"
         android:backgroundTint="@color/colorWhite"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_12sdp"
         >
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="20dp"
-            android:layout_margin="2dp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="@dimen/_20sdp"
+            android:layout_margin="@dimen/_2sdp"
             android:backgroundTint="@color/colorBackground"
             >
 
@@ -45,29 +45,28 @@
                 android:textColorHint="@color/colorWhite"
                 android:gravity="center"
                 android:background="@null"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
                 app:backgroundTint="@color/colorWhite"/>
-
-
         </android.support.v7.widget.CardView>
     </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="20dp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_20sdp"
         android:backgroundTint="@color/colorWhite"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_12sdp"
         >
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="20dp"
-            android:layout_margin="2dp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="@dimen/_20sdp"
+            android:layout_margin="@dimen/_2sdp"
             android:backgroundTint="@color/colorBackground"
             >
 
@@ -80,173 +79,117 @@
                 android:textColorHint="@color/colorWhite"
                 android:gravity="center"
                 android:background="@null"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
                 app:backgroundTint="@color/colorWhite"/>
-
-
         </android.support.v7.widget.CardView>
-    </android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView><android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_20sdp"
+    android:backgroundTint="@color/colorWhite"
+    android:layout_marginLeft="@dimen/_12sdp"
+    android:layout_marginTop="@dimen/_20sdp"
+    android:layout_marginRight="@dimen/_12sdp"
+    >
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="20dp"
-        android:backgroundTint="@color/colorWhite"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="12dp"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="@dimen/_20sdp"
+        android:layout_margin="@dimen/_2sdp"
+        android:backgroundTint="@color/colorBackground"
         >
-        <android.support.v7.widget.CardView
+
+        <EditText
+            android:id="@+id/register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="20dp"
-            android:layout_margin="2dp"
-            android:backgroundTint="@color/colorBackground"
-            >
-
-            <EditText
-                android:id="@+id/register_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password"
-                android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite"
-                android:gravity="center"
-                android:background="@null"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                app:backgroundTint="@color/colorWhite"/>
-
-
-        </android.support.v7.widget.CardView>
+            android:hint="Password"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:gravity="center"
+            android:background="@null"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            app:backgroundTint="@color/colorWhite"/>
     </android.support.v7.widget.CardView>
+</android.support.v7.widget.CardView><android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_20sdp"
+    android:backgroundTint="@color/colorWhite"
+    android:layout_marginLeft="@dimen/_12sdp"
+    android:layout_marginTop="@dimen/_20sdp"
+    android:layout_marginRight="@dimen/_12sdp"
+    >
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="20dp"
-        android:backgroundTint="@color/colorWhite"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="12dp"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="@dimen/_20sdp"
+        android:layout_margin="@dimen/_2sdp"
+        android:backgroundTint="@color/colorBackground"
         >
-        <android.support.v7.widget.CardView
+
+        <EditText
+            android:id="@+id/register_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="20dp"
-            android:layout_margin="2dp"
-            android:backgroundTint="@color/colorBackground"
-            >
-
-            <EditText
-                android:id="@+id/register_alamatEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Alamat Email"
-                android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite"
-                android:gravity="center"
-                android:background="@null"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:inputType="textEmailAddress"
-                app:backgroundTint="@color/colorWhite"/>
-
-
-        </android.support.v7.widget.CardView>
+            android:hint="Alamat Email"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:gravity="center"
+            android:background="@null"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            app:backgroundTint="@color/colorWhite"/>
     </android.support.v7.widget.CardView>
+</android.support.v7.widget.CardView><android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_20sdp"
+    android:backgroundTint="@color/colorWhite"
+    android:layout_marginLeft="@dimen/_12sdp"
+    android:layout_marginTop="@dimen/_20sdp"
+    android:layout_marginRight="@dimen/_12sdp"
+    >
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="20dp"
-        android:backgroundTint="@color/colorWhite"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="12dp"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="@dimen/_20sdp"
+        android:layout_margin="@dimen/_2sdp"
+        android:backgroundTint="@color/colorBackground"
         >
-        <android.support.v7.widget.CardView
+
+        <EditText
+            android:id="@+id/register_Notelepon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="20dp"
-            android:layout_margin="2dp"
-            android:backgroundTint="@color/colorBackground"
-            >
-
-            <EditText
-                android:id="@+id/register_noTelepon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="No. Telepon"
-                android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite"
-                android:gravity="center"
-                android:background="@null"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:inputType="number"
-                app:backgroundTint="@color/colorWhite"/>
-
-
-        </android.support.v7.widget.CardView>
+            android:hint="No. Telepon"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:gravity="center"
+            android:background="@null"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            app:backgroundTint="@color/colorWhite"/>
     </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="20dp"
-        android:backgroundTint="@color/colorWhite"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="12dp"
-        >
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="20dp"
-            android:layout_margin="2dp"
-            android:backgroundTint="@color/colorBackground"
-            >
-
-            <EditText
-                android:id="@+id/register_alamat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Alamat"
-                android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite"
-                android:gravity="center"
-                android:background="@null"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                app:backgroundTint="@color/colorWhite"/>
-
-
-        </android.support.v7.widget.CardView>
-    </android.support.v7.widget.CardView>
-
+</android.support.v7.widget.CardView>
 
     <Button
         android:id="@+id/button_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_40sdp"
+        android:layout_marginRight="@dimen/_40sdp"
         android:text="Register"
-        android:textSize="30sp"
+        android:textSize="@dimen/_25ssp"
         android:background="@drawable/button_register"/>
-
-
-
-
-
-
-
 
 </LinearLayout>

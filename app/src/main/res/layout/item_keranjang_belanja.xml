@@ -3,24 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingRight="5dp"
-    android:paddingLeft="5dp"
-    android:paddingTop="5dp">
+    android:paddingRight="@dimen/_5sdp"
+    android:paddingLeft="@dimen/_5sdp"
+    android:paddingTop="@dimen/_5sdp">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="20dp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_20sdp"
         android:backgroundTint="@color/colorWhite"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/_10sdp"
         >
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="20dp"
-            android:layout_margin="2dp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="@dimen/_20sdp"
+            android:layout_margin="@dimen/_2sdp"
             android:backgroundTint="@color/colorBackground"
             >
 
@@ -28,14 +28,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/_10sdp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="100dp"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_100sdp"
                         android:src="@drawable/img_facialc_cleanser"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -61,25 +61,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingLeft="5dp">
+                    android:paddingLeft="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/nama_produk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="FACIAL CLEANSER PEMUTIH KULIT WAJAH ALAMAI/Produk Kecantikan"
                         android:textColor="@color/colorWhite"
-                        android:textSize="15sp"/>
+                        android:textSize="@dimen/_12ssp"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <TextView
                             android:id="@+id/penjelasan_produk"
-                            android:layout_width="180dp"
-                            android:layout_height="80dp"
+                            android:layout_width="@dimen/_120sdp"
+                            android:layout_height="@dimen/_80sdp"
                             android:text="nkjnkdalksndalksndlaknsdlansdlaksndlkasndlkasndlaksndsndjnksafbdskajdakdksadbkasdbaksdbkasjbdakjsbdkajsbdka"
                             android:textColor="@color/colorWhite"
-                            android:paddingRight="20dp"
+                            android:paddingRight="@dimen/_10sdp"
                             />
                             <LinearLayout
                                 android:layout_width="wrap_content"

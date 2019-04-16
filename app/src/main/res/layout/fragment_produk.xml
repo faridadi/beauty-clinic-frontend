@@ -25,8 +25,8 @@
                 android:orientation="horizontal"
                 android:layout_alignParentStart="true">
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:src="@drawable/ic_cosmetic"
                     />
                 <TextView
@@ -34,14 +34,15 @@
                     android:layout_height="wrap_content"
                     android:text="Produk"
                     android:textColor="@color/colorWhite"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="5dp"/>
+                    android:textSize="@dimen/_20ssp"
+                    android:layout_marginLeft="@dimen/_5sdp"/>
 
             </LinearLayout>
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/aaa"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_shopping_cart"/>
 
@@ -51,8 +52,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_produk"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_keranjang_belanja"/>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_produk"/>
 
 
 </LinearLayout>
