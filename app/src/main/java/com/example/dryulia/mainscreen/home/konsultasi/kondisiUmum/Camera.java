@@ -22,6 +22,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -32,12 +33,20 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dryulia.R;
 
 
 public class Camera extends AppCompatActivity {
+    private static final int CAMERA_REQUEST = 1888;
+    private ImageView imageView;
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
 
-
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camera);
+    }
 }

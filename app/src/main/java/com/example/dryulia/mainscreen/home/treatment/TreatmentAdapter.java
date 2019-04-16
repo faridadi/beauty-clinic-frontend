@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.Trea
     private ArrayList<TreatmentModel> treatmentModelArrayList;
     private View view;
     boolean showFirst = true;
+
 
     public TreatmentAdapter(Context context) {
         this.context = context;
@@ -58,10 +60,10 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.Trea
         treatmentItemViewHolder.judulTreatment.setText(treatmentModel.getNamaTreatment());
         treatmentItemViewHolder.detailTreatment.setText(treatmentModel.getDetailTreatment());
         treatmentItemViewHolder.hargaTreatment.setText(String.valueOf(treatmentModel.getHargaTreatment()));
-        treatmentModelArrayList.get(position);
         treatmentItemViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("posisi", treatmentModel.getIndex()+"" );
                 if (showFirst == true){
                     treatmentItemViewHolder.imgStatus.setImageResource(R.drawable.ic_treatment_true);
                     showFirst = false;
