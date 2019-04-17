@@ -54,12 +54,12 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ProdukItem
         produkItemViewHolder.detailProduk.setText(produkModel.getDetailProduk());
         produkItemViewHolder.hargaProduk.setText("" + produkModel.getHargaProduk());
         produkItemViewHolder.jumlahProduk.setText("" + produkModel.getJumlahOrder());
-
+        final int jumlah = new int[1];
         produkItemViewHolder.icPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                jumlahProduk++;
-                produkItemViewHolder.jumlahProduk.setText(String.valueOf(jumlahProduk));
+                jumlah[0]++;
+                produkItemViewHolder.jumlahProduk.setText(String.valueOf(jumlah[0]));
 
             }
         });
@@ -67,9 +67,9 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ProdukItem
         produkItemViewHolder.icMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                jumlahProduk--;
-                if (jumlahProduk >= 1){
-                    produkItemViewHolder.jumlahProduk.setText(String.valueOf(jumlahProduk));
+                jumlah[0]--;
+                if (jumlah[0] >= 1){
+                    produkItemViewHolder.jumlahProduk.setText(String.valueOf(jumlah[0]));
                 }else{
                     produkItemViewHolder.jumlahProduk.setText("1");
                 }
