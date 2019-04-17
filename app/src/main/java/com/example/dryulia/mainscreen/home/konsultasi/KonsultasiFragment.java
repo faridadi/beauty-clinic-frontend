@@ -42,10 +42,18 @@ public class KonsultasiFragment extends Fragment {
         return instance;
     }
 
+    private Fragment pilihlayananFragment;
+    private Fragment kondisiUmumFragment;
+    private Fragment bookingFragment;
+    private Fragment antrianFragment;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        pilihlayananFragment = new PilihLayananFragment();
+        kondisiUmumFragment = new KondisiUmumFragment();
+        bookingFragment = new BookingFragment();
+        antrianFragment = new AntrianFragment();
     }
 
     @Override
@@ -76,16 +84,12 @@ public class KonsultasiFragment extends Fragment {
         Log.d("step", step  + "");
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         if (step == 0){
-            Fragment pilihlayananFragment = new PilihLayananFragment();
             transaction.replace(R.id.content_konsultasi, pilihlayananFragment).commit();
         }else if(step == 1){
-            Fragment kondisiUmumFragment = new KondisiUmumFragment();
             transaction.replace(R.id.content_konsultasi, kondisiUmumFragment).commit();
         }else if(step == 2){
-            Fragment bookingFragment = new BookingFragment();
             transaction.replace(R.id.content_konsultasi, bookingFragment).commit();
         }else if(step == 3){
-            Fragment antrianFragment = new AntrianFragment();
             transaction.replace(R.id.content_konsultasi, antrianFragment).commit();
         }
         stepView.go(step, true);
@@ -145,5 +149,15 @@ public class KonsultasiFragment extends Fragment {
 
     public void setsTanggalKonsultasi(String sTanggalKonsultasi) {
         this.sTanggalKonsultasi = sTanggalKonsultasi;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }

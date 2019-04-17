@@ -17,50 +17,56 @@ import com.example.dryulia.mainscreen.profile.ProfileFragment;
 public class MainScreenActivity extends AppCompatActivity {
 
     public BottomNavigationView bottomNavigationView;
-    private Fragment selectedFragment;
+    private static Fragment selectedFragment;
     private static MainScreenActivity mainScreenActivity;
     public static int selectedMenuId;
 
     public static MainScreenActivity getInstance() {
         return mainScreenActivity;
     }
-
+    Fragment home;
+    Fragment profile;
+    Fragment event;
+    Fragment message;
+    FragmentTransaction fragmentTransaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         mainScreenActivity = this;
-
+        home  = new HomeFragment();
+        profile = new ProfileFragment();
+        event = new EventFragment();
+        message = new MessageFragment();
         selectedMenuId = R.id.menu_home;
-
         bottomNavigationView = findViewById(R.id.bottomNavigation);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.menu_home:
-                        selectedFragment = new HomeFragment();
+                        selectedFragment = home;
                         break;
                     case R.id.menu_account:
-                        selectedFragment = new ProfileFragment();
+                        selectedFragment = profile;
                         break;
                     case R.id.menu_event:
-                        selectedFragment = new EventFragment();
+                        selectedFragment = event;
                         break;
                     case R.id.menu_message:
-                        selectedFragment = new MessageFragment();
+                        selectedFragment = message;
                         break;
-
                 }
-
                 selectedMenuId = menuItem.getItemId();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content, selectedFragment);
                 fragmentTransaction.commit();
                 return true;
             }
         });
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.content, home);
+        fragmentTransaction.commit();
     }
 
 
@@ -80,7 +86,11 @@ public class MainScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        bottomNavigationView.setSelectedItemId(selectedMenuId);
         super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

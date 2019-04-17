@@ -27,14 +27,19 @@ public class HomeFragment extends Fragment {
 
     CarouselView carouselView;
 
-        private View view;
-        CardView cvKonsultasi, cvTreatment, cvProduk, cvMedicalAdvice,cvBill, cvRekamMedis;
+    private View view;
+    CardView cvKonsultasi, cvTreatment, cvProduk, cvMedicalAdvice,cvBill, cvRekamMedis;
     private android.app.Fragment selectedFragment;
     private static MainScreenActivity mainScreenActivity;
     public static int selectedMenuId;
+    private Fragment konsultasiFragment;
+    private Fragment treatmentFragment;
+    private Fragment produkFragment;
 
 
+    public HomeFragment() {
 
+    }
 
 
     @Override
@@ -63,23 +68,16 @@ public class HomeFragment extends Fragment {
         };
         carouselView.setImageListener(imageListener);
 
+        konsultasiFragment = new KonsultasiFragment();
+        treatmentFragment = new TreatmentFragment();
+        produkFragment = new ProdukFragment();
 
         cvKonsultasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Anda Memilih Konsultasi", Toast.LENGTH_SHORT).show();
-
-                /*MainScreenActivity.getInstance().setPage(0);
-
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.con, new PilihLayananFragment());
-                fr.commit();*/
-
-                Fragment konsultasiFragment = new KonsultasiFragment();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.content, konsultasiFragment).commit();
-
-
             }
         });
 
@@ -88,7 +86,6 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Anda Memilih Treatment", Toast.LENGTH_SHORT).show();
 
-                Fragment treatmentFragment = new TreatmentFragment();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.content, treatmentFragment).commit();
             }
@@ -98,7 +95,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Anda Memilih Produk", Toast.LENGTH_SHORT).show();
-                Fragment produkFragment = new ProdukFragment();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.content, produkFragment).commit();
             }
@@ -138,6 +134,14 @@ public class HomeFragment extends Fragment {
 
         }
 
-
+    @Override
+    public void onStart() {
+        super.onStart();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+}
 

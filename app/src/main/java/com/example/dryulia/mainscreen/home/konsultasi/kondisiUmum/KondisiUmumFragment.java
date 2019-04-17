@@ -2,6 +2,7 @@ package com.example.dryulia.mainscreen.home.konsultasi.kondisiUmum;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -30,6 +32,8 @@ import com.example.dryulia.mainscreen.MainScreenActivity;
 import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.Objects;
 
 public class KondisiUmumFragment extends Fragment {
 
@@ -45,7 +49,7 @@ public class KondisiUmumFragment extends Fragment {
     public static KondisiUmumFragment getInstance() {
         return kondisiUmumFragment;
     }
-
+    private  Uri imageUri = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +71,7 @@ public class KondisiUmumFragment extends Fragment {
         depan = view.findViewById(R.id.bagian_depan);
         kiri = view.findViewById(R.id.bagian_kiri);
         kanan = view.findViewById(R.id.bagian_kanan);
-        imageView = view.findViewById(R.id.mother_image);
+        motherImage = view.findViewById(R.id.mother_image);
 
 
         depan.setOnClickListener(new View.OnClickListener() {
@@ -75,12 +79,19 @@ public class KondisiUmumFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (getContext().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-                } else {
-                    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                }
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                File photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photo));
+                imageUri = Uri.fromFile(photo);
+                startActivityForResult(intent, MY_CAMERA_PERMISSION_CODE);
+
+                //if (Objects.requireNonNull(getContext()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                //    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                //} else {
+               //     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                 //   startActivityForResult(cameraIntent, MY_CAMERA_PERMISSION_CODE);
+                //}
             }
 
         });
@@ -113,7 +124,7 @@ public class KondisiUmumFragment extends Fragment {
                 Toast.makeText(getContext(), "camera permission granted", Toast.LENGTH_LONG).show();
                 //Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                getActivity().startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                startActivityForResult(cameraIntent, MY_CAMERA_PERMISSION_CODE);
             } else {
                 Toast.makeText(getContext(), "camera permission denied", Toast.LENGTH_LONG).show();
             }
@@ -147,27 +158,28 @@ public class KondisiUmumFragment extends Fragment {
 */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-       // Toast.makeText(getContext(), "camera permission granted", Toast.LENGTH_LONG).show();
-        if (requestCode == CAMERA_REQUEST) {
+       //Toast.makeText(getContext(), "camera permission granted", Toast.LENGTH_LONG).show();
+        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
             if (resultCode == Activity.RESULT_OK) {
 
-                Bitmap bmp = (Bitmap) data.getExtras().get("data");
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Uri selectedImage = imageUri;
+                getActivity().getContentResolver().notifyChange(selectedImage, null);
+                ContentResolver cr = getActivity().getContentResolver();
+                Bitmap bitmap;
+                try {
+                    bitmap = android.provider.MediaStore.Images.Media
+                            .getBitmap(cr, selectedImage);
 
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-
-                // convert byte array to Bitmap
-
-                Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
-                        byteArray.length);
-                Log.d("foto", bitmap.toString());
-                try{
                     motherImage.setImageBitmap(bitmap);
-                }catch (Exception e){
-                    Toast.makeText(getContext(), "foto error", Toast.LENGTH_LONG).show();
-                }
 
+                    Toast.makeText(getActivity(), selectedImage.toString(),
+                            Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "Failed to load", Toast.LENGTH_SHORT)
+                            .show();
+                    Log.e("Camera", e.toString());
+                    Log.d("URI", selectedImage.toString());
+                }
 
             }
             else {

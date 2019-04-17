@@ -32,5 +32,15 @@ public class AntrianFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_antrian, container, false);
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
 
