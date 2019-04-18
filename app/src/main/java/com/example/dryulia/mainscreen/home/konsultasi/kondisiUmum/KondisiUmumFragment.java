@@ -2,7 +2,6 @@ package com.example.dryulia.mainscreen.home.konsultasi.kondisiUmum;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,9 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,14 +26,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.dryulia.R;
-import com.example.dryulia.mainscreen.MainScreenActivity;
 import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.util.Objects;
 
 public class KondisiUmumFragment extends Fragment {
 
@@ -52,7 +44,6 @@ public class KondisiUmumFragment extends Fragment {
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final int MY_READ_PERMISSION_CODE = 50;
     private static final int MY_WRITE_PERMISSION_CODE = 60;
-
     public static KondisiUmumFragment getInstance() {
         return kondisiUmumFragment;
     }
@@ -170,8 +161,6 @@ public class KondisiUmumFragment extends Fragment {
                 } catch (Exception e) {
                     Log.e("onActivityResult", e.toString());
                 }
-
-
             }
             else {
                 Log.d("foto", "gagal boss");

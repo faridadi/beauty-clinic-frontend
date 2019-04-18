@@ -22,12 +22,9 @@ import com.example.dryulia.R;
 
 import java.util.Calendar;
 
-
 public class PilihLayananFragment extends Fragment {
 
     EditText edtKeluhan, edtAreaKeluhan, edtLamaKeluhan, edtRiwayatCream, edtRiwayatPerawatan;
-
-
     private View view;
     private Button btnSimpan;
     private ImageView imgTanggal;
@@ -88,9 +85,6 @@ public class PilihLayananFragment extends Fragment {
                 dpd.show();
             }
         });
-
-
-
     }
 
     @Override
