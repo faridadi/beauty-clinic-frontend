@@ -8,54 +8,9 @@
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_chat"
+        android:id="@+id/rv_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_event"
         android:layout_marginBottom="80dp"/>
-
-   <!-- <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/_15sdp"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sub Total: "
-                android:textColor="@color/colorWhite"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rp. "
-                android:textColor="@color/colorGreen"
-                />
-            <TextView
-                android:id="@+id/subtotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="936.000"
-                android:textColor="@color/colorGreen"/>
-
-        </LinearLayout>
-
-        <Button
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="wrap_content"
-            android:text="Beli"
-            android:textSize="@dimen/_25ssp"
-            android:background="@color/colorButtonBeli"
-            android:textColor="@color/colorWhite"
-            android:layout_alignParentEnd="true"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            android:layout_weight="1"/>
-    </LinearLayout>-->
 </FrameLayout>

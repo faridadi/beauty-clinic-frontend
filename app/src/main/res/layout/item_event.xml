@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingLeft="@dimen/_5sdp"
     android:paddingTop="@dimen/_5sdp"
@@ -38,7 +38,7 @@
                     android:src="@drawable/ic_quality"
                     android:layout_gravity="center"/>
                 <TextView
-                    android:id="@+id/header_event"
+                    android:id="@+id/tv_event_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -46,6 +46,7 @@
                     android:textColor="@color/colorWhite"/>
             </LinearLayout>
             <ImageView
+                android:id="@+id/img_event"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_180sdp"
                 android:padding="@dimen/_10sdp"
@@ -57,7 +58,7 @@
                 android:paddingLeft="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp">
                 <TextView
-                    android:id="@+id/tv_caption"
+                    android:id="@+id/tv_event_caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="[Promo Februari]
