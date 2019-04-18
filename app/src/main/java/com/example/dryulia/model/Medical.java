@@ -2,7 +2,7 @@ package com.example.dryulia.model;
 
 public class Medical {
     private int id;
-    private String name;
+    private String nama;
     private int harga;
     private int jumlah;
     private String kode;
@@ -11,9 +11,9 @@ public class Medical {
     public Medical() {
     }
 
-    public Medical(int id, String name, int harga, int jumlah, String kode, int type) {
+    public Medical(int id, String nama, int harga, int jumlah, String kode, int type) {
         this.id = id;
-        this.name = name;
+        this.nama = nama;
         this.harga = harga;
         this.jumlah = jumlah;
         this.kode = kode;
@@ -28,12 +28,12 @@ public class Medical {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNama() {
+        return nama;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public int getHarga() {

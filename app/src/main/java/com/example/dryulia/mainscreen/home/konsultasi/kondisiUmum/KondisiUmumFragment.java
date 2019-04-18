@@ -16,7 +16,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.annotation.RequiresFeature;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -122,7 +121,7 @@ public class KondisiUmumFragment extends Fragment {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         imageUri = Uri.fromFile(photo);
-        startActivityForResult(intent, MY_CAMERA_PERMISSION_CODE);
+        startActivityForResult(intent, CAMERA_REQUEST);
     }
 
 
@@ -179,7 +178,7 @@ public class KondisiUmumFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
+        if (requestCode == CAMERA_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri selectedImage = imageUri;
                 try {
