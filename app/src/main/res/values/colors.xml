@@ -30,5 +30,8 @@
     <color name="colorBackgroundLogoYulia">#484848</color>
     <color name="colorRegister">#979694</color>
 
+    <color name="colorProfileBackground">#F6F6F6</color>
+
+
 
 </resources>
