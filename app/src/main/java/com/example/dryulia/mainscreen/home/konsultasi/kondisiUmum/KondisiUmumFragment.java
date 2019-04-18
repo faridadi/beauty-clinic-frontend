@@ -33,12 +33,14 @@ import java.io.File;
 public class KondisiUmumFragment extends Fragment {
 
     private View view;
-    Button btnSimpan;
+    Button btnSimpan, reTake;
     CardView depan, kiri, kanan;
     ImageView motherImage;
     ImageView depanImage;//1
     ImageView kiriImage; //2
     ImageView kananImage;//3
+    int tmp2 = 0;
+
     int tmp = 0;
     private static KondisiUmumFragment kondisiUmumFragment;
     private static final int CAMERA_REQUEST = 1888;
@@ -70,13 +72,34 @@ public class KondisiUmumFragment extends Fragment {
         depan = view.findViewById(R.id.bagian_depan);
         kiri = view.findViewById(R.id.bagian_kiri);
         kanan = view.findViewById(R.id.bagian_kanan);
+        kiriImage = view.findViewById(R.id.img_kiri);
+        kananImage = view.findViewById(R.id.img_kanan);
+        depanImage = view.findViewById(R.id.img_depan);
         motherImage = view.findViewById(R.id.mother_image);
-        depan.setOnClickListener(new View.OnClickListener() {
+        reTake = view.findViewById(R.id.retake);
+        reTake.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
                 if (checkPermission()) {
-                    takePicture(1);
+                    takePicture(tmp2);
+                }else {
+                    motherImage.setImageDrawable(depanImage.getDrawable());
+                }
+            }
+        });
+        depan.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                tmp2 = 1;
+                if (depanImage.getDrawable() == null){
+                    if (checkPermission()) {
+                        takePicture(1);
+                    }
+                }else{
+                    motherImage.setImageDrawable(depanImage.getDrawable());
+
                 }
             }
         });
@@ -85,21 +108,34 @@ public class KondisiUmumFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (checkPermission()) {
-                    takePicture(2);
+                tmp2 = 2;
+                if (kiriImage.getDrawable() == null){
+                    if (checkPermission()) {
+                        takePicture(2);
+                    }
+                }else{
+                    motherImage.setImageDrawable(kiriImage.getDrawable());
                 }
             }
+
         });
 
         kanan.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (checkPermission()) {
-                    takePicture(3);
+                tmp2 = 3;
+                if (kananImage.getDrawable() == null){
+                    if (checkPermission()) {
+                        takePicture(3);
+                    }
+                }else{
+                    motherImage.setImageDrawable(kananImage.getDrawable());
                 }
             }
         });
+
+
 
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,12 +224,20 @@ public class KondisiUmumFragment extends Fragment {
                     switch (tmp){
                         case 1:
                             motherImage.setImageBitmap(bitmap);
+                            depanImage.setImageBitmap(bitmap);
+                            reTake.setVisibility(View.VISIBLE);
                             Toast.makeText(getActivity(), "foto depan", Toast.LENGTH_SHORT).show();
                             break;
                         case 2 :
+                            motherImage.setImageBitmap(bitmap);
+                            kiriImage.setImageBitmap(bitmap);
+                            reTake.setVisibility(View.VISIBLE);
                             Toast.makeText(getContext(), "foto kiri", Toast.LENGTH_SHORT).show();
                             break;
                         case 3 :
+                            motherImage.setImageBitmap(bitmap);
+                            kananImage.setImageBitmap(bitmap);
+                            reTake.setVisibility(View.VISIBLE);
                             Toast.makeText(getActivity(), "foto kanan", Toast.LENGTH_SHORT).show();
                             break;
                         default :
