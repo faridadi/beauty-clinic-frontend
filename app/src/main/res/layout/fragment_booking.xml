@@ -81,6 +81,7 @@
                     android:paddingRight="@dimen/_15sdp"
                     >
                     <ImageView
+                        android:id="@+id/img_barcode"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_120sdp"
                         android:background="@color/colorYellow"
