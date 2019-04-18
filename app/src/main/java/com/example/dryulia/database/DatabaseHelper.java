@@ -42,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL("Create table voucher(id INTEGER PRIMARY KEY, nama TEXT, kode TEXT, des TEXT, type INT, percen INTEGER, harga INTEGER)");
         //Type 1 = produk, 2 = Treatment, konsul, 3 = voucher
         db.execSQL("Create table medical(id INTEGER PRIMARY KEY, nama TEXT, harga INT, jumlah INT, kode TEXT, type INT)");
-        db.execSQL("Create table konsul(id INTEGER PRIMARY KEY, keluhan TEXT, area INTEGER, lama TEXT, riwayatobat TEXT, riwayatperawatan TEXT, date TEXT, depan TEXT, kiri TEXT, kanan TEXT)");
+        db.execSQL("Create table konsul(id INTEGER PRIMARY KEY, keluhan TEXT, area INTEGER, lama TEXT, riwayatobat TEXT, riwayatperawatan TEXT, date TEXT, depan TEXT, kiri TEXT, kanan TEXT, barcode TEXT)");
 
     }
 
@@ -76,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
             values.put("depan", konsul.getDepan());
             values.put("kiri", konsul.getKiri());
             values.put("kanan", konsul.getKanan());
+            values.put("barcode", konsul.getBarcode());
             // insert row
             long ins = db.insert("konsul", null, values);
             // assigning tags to todo
@@ -117,6 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 data.setDepan           (cursor.getString(cursor.getColumnIndex("depan")));
                 data.setKiri            (cursor.getString(cursor.getColumnIndex("kiri")));
                 data.setKanan           (cursor.getString(cursor.getColumnIndex("kanan")));
+                data.setBarcode           (cursor.getString(cursor.getColumnIndex("barcode")));
                 return data;
             }else {
                 return null;

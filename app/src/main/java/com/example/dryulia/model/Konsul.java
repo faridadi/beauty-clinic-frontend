@@ -11,11 +11,12 @@ public class Konsul {
     private String depan;
     private String kiri;
     private String kanan;
+    private String barcode;
 
     public Konsul() {
     }
 
-    public Konsul(int id, String keluhan, String area, String lama, String riwayatobat, String riwayatPerawatan, String date, String depan, String kiri, String kanan) {
+    public Konsul(int id, String keluhan, String area, String lama, String riwayatobat, String riwayatPerawatan, String date, String depan, String kiri, String kanan, String barcode) {
         this.id = id;
         this.keluhan = keluhan;
         this.area = area;
@@ -26,6 +27,7 @@ public class Konsul {
         this.depan = depan;
         this.kiri = kiri;
         this.kanan = kanan;
+        this.barcode = barcode;
     }
 
     public int getId() {
@@ -106,5 +108,13 @@ public class Konsul {
 
     public void setKanan(String kanan) {
         this.kanan = kanan;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 }

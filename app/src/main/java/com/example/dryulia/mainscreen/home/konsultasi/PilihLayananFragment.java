@@ -48,6 +48,7 @@ public class PilihLayananFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         btnSimpan = view.findViewById(R.id.btn_simpan_pilihLayanan);
         edtKeluhan = view.findViewById(R.id.edt_keluhan);
         edtAreaKeluhan = view.findViewById(R.id.edt_area_keluhan);
