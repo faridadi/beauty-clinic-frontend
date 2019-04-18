@@ -12,12 +12,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,10 +44,14 @@ public class KondisiUmumFragment extends Fragment {
     Button btnSimpan;
     CardView depan, kiri, kanan;
     ImageView motherImage;
+    ImageView depanImage;
+    ImageView kiriImage;
+    ImageView kananImage;
     private static KondisiUmumFragment kondisiUmumFragment;
     private static final int CAMERA_REQUEST = 1888;
-    private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
+    private static final int MY_READ_PERMISSION_CODE = 50;
+    private static final int MY_WRITE_PERMISSION_CODE = 60;
 
     public static KondisiUmumFragment getInstance() {
         return kondisiUmumFragment;
@@ -72,26 +79,22 @@ public class KondisiUmumFragment extends Fragment {
         kiri = view.findViewById(R.id.bagian_kiri);
         kanan = view.findViewById(R.id.bagian_kanan);
         motherImage = view.findViewById(R.id.mother_image);
-
-
         depan.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        Uri.fromFile(photo));
-                imageUri = Uri.fromFile(photo);
-                startActivityForResult(intent, MY_CAMERA_PERMISSION_CODE);
-
-                //if (Objects.requireNonNull(getContext()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                //    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-                //} else {
-               //     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                 //   startActivityForResult(cameraIntent, MY_CAMERA_PERMISSION_CODE);
-                //}
+                if (checkPermission()) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                            String.valueOf(System.currentTimeMillis()) + ".jpg");
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                            Uri.fromFile(photo));
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                    StrictMode.setVmPolicy(builder.build());
+                    imageUri = Uri.fromFile(photo);
+                    startActivityForResult(intent, MY_CAMERA_PERMISSION_CODE);
+                }
             }
 
         });
@@ -102,9 +105,24 @@ public class KondisiUmumFragment extends Fragment {
                 KonsultasiFragment.getInstance().setStep(2);
             }
         });
-
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private boolean checkPermission(){
+        if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            getActivity().requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_READ_PERMISSION_CODE);
+            return false;
+        }
+        if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            getActivity().requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_WRITE_PERMISSION_CODE);
+            return false;
+        }
+        if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+            return false;
+        }
+        return true;
+    }
 
     //check the device has camera
     private boolean checkCameraHardware(Context context) {
@@ -121,65 +139,38 @@ public class KondisiUmumFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_CAMERA_PERMISSION_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getContext(), "camera permission granted", Toast.LENGTH_LONG).show();
-                //Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, MY_CAMERA_PERMISSION_CODE);
+                Toast.makeText(getContext(), "camera permission denied", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getContext(), "camera permission denied", Toast.LENGTH_LONG).show();
             }
-        }
-    }
-
-
-
-        /*public void onActivityResult(int requestCode, int resultCode, Intent data)
-        {
-            super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
-            {
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-                imageView.setImageBitmap(photo);
-
-
-
+        }else if (requestCode == MY_READ_PERMISSION_CODE){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(getContext(), "READ DATA BERHASIL", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getContext(), "READ DATA ERROR", Toast.LENGTH_SHORT).show();
             }
-        }*/
-/*
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            //motherImage.setImageBitmap(photo);
-
+        }else if (requestCode == MY_WRITE_PERMISSION_CODE){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(getContext(), "WRITE DATA BERHASIL", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getContext(), "WRITE DATA ERROR", Toast.LENGTH_SHORT).show();
+            }
         }
     }
-*/
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-       //Toast.makeText(getContext(), "camera permission granted", Toast.LENGTH_LONG).show();
         if (requestCode == MY_CAMERA_PERMISSION_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-
                 Uri selectedImage = imageUri;
-                getActivity().getContentResolver().notifyChange(selectedImage, null);
-                ContentResolver cr = getActivity().getContentResolver();
-                Bitmap bitmap;
                 try {
-                    bitmap = android.provider.MediaStore.Images.Media
-                            .getBitmap(cr, selectedImage);
-
+                    Bitmap bitmap;
+                    bitmap = BitmapFactory.decodeFile(selectedImage.getEncodedPath());
                     motherImage.setImageBitmap(bitmap);
-
-                    Toast.makeText(getActivity(), selectedImage.toString(),
-                            Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "Failed to load", Toast.LENGTH_SHORT)
-                            .show();
-                    Log.e("Camera", e.toString());
-                    Log.d("URI", selectedImage.toString());
+                    Log.e("onActivityResult", e.toString());
                 }
+
 
             }
             else {
