@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.annotation.RequiresFeature;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -36,9 +37,10 @@ public class KondisiUmumFragment extends Fragment {
     Button btnSimpan;
     CardView depan, kiri, kanan;
     ImageView motherImage;
-    ImageView depanImage;
-    ImageView kiriImage;
-    ImageView kananImage;
+    ImageView depanImage;//1
+    ImageView kiriImage; //2
+    ImageView kananImage;//3
+    int tmp = 0;
     private static KondisiUmumFragment kondisiUmumFragment;
     private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
@@ -75,19 +77,29 @@ public class KondisiUmumFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (checkPermission()) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                            String.valueOf(System.currentTimeMillis()) + ".jpg");
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                            Uri.fromFile(photo));
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                    StrictMode.setVmPolicy(builder.build());
-                    imageUri = Uri.fromFile(photo);
-                    startActivityForResult(intent, MY_CAMERA_PERMISSION_CODE);
+                    takePicture(1);
                 }
             }
+        });
 
+        kiri.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                if (checkPermission()) {
+                    takePicture(2);
+                }
+            }
+        });
+
+        kanan.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                if (checkPermission()) {
+                    takePicture(3);
+                }
+            }
         });
 
         btnSimpan.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +109,22 @@ public class KondisiUmumFragment extends Fragment {
             }
         });
     }
+
+    private void takePicture(int image){
+        //1 depan, 2 kiri. 3 kanan
+        tmp = image;
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                String.valueOf(System.currentTimeMillis()) + ".jpg");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                Uri.fromFile(photo));
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        imageUri = Uri.fromFile(photo);
+        startActivityForResult(intent, MY_CAMERA_PERMISSION_CODE);
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean checkPermission(){
@@ -157,7 +185,22 @@ public class KondisiUmumFragment extends Fragment {
                 try {
                     Bitmap bitmap;
                     bitmap = BitmapFactory.decodeFile(selectedImage.getEncodedPath());
-                    motherImage.setImageBitmap(bitmap);
+                    //1 depan, 2 kiri, 3 kanan
+                    switch (tmp){
+                        case 1:
+                            motherImage.setImageBitmap(bitmap);
+                            Toast.makeText(getActivity(), "foto depan", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 2 :
+                            Toast.makeText(getContext(), "foto kiri", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 3 :
+                            Toast.makeText(getActivity(), "foto kanan", Toast.LENGTH_SHORT).show();
+                            break;
+                        default :
+                             Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                             break;
+                    }
                 } catch (Exception e) {
                     Log.e("onActivityResult", e.toString());
                 }
@@ -166,7 +209,6 @@ public class KondisiUmumFragment extends Fragment {
                 Log.d("foto", "gagal boss");
             }
         }
-
     }
 }
 

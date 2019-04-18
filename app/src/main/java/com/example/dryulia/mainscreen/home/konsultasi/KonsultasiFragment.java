@@ -19,7 +19,7 @@ import java.util.Calendar;
 
 public class KonsultasiFragment extends Fragment {
     //Pilih Layanan Fragment
-    private String sKeluhan, sAreaKeluhan, sLamaKeluhan, sRiwayatCream, sRiwayatPerawatan, sTanggalKonsultasi;
+    private String sKeluhan, sAreaKeluhan, sLamaKeluhan, sRiwayatCream, sRiwayatPerawatan, sTanggalKonsultasi, depan, kiri, kanan;
     private Calendar sCalendar;
 
     public Calendar getsCalendar() {
