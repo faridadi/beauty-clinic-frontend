@@ -1,11 +1,17 @@
 package com.example.dryulia.mainscreen.home.konsultasi;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,8 +41,10 @@ public class BookingFragment extends Fragment {
 
     private View view;
     Button btnCancel, btnNext;
-    ImageView barcodeImage;
+    ImageView barcodeImage, imgAnamnesa;
     TextView barcodeText;
+    Dialog myDialog;
+    CardView a;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +67,26 @@ public class BookingFragment extends Fragment {
         barcodeText = view.findViewById(R.id.booking_code);
         btnNext = view.findViewById(R.id.btn_booking_next);
         btnCancel = view.findViewById(R.id.btn_booking_cancel);
+        imgAnamnesa = view.findViewById(R.id.booking_anamnesa);
+        a = view.findViewById(R.id.a);
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
         final Fragment activity = this;
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +127,31 @@ public class BookingFragment extends Fragment {
                 //
             }
         });
+
+        imgAnamnesa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void showDialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setCancelable(true);
+
+        View view  = getActivity().getLayoutInflater().inflate(R.layout.popup_anamnesa, null);
+        dialog.setContentView(view);
+
+        final ImageView exit = view.findViewById(R.id.img_popup_anamnesa_exit);
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -123,4 +175,6 @@ public class BookingFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
+
+
 }

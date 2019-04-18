@@ -14,14 +14,15 @@
             android:orientation="vertical"
             android:paddingLeft="@dimen/_20sdp"
             android:paddingRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
+                    android:layout_width="@dimen/_47sdp"
+                    android:layout_height="@dimen/_47sdp"
                     android:src="@drawable/ic_profile"
                     android:layout_centerInParent="true"/>
                 <LinearLayout
@@ -202,7 +203,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/_8sdp"
-                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
                     android:backgroundTint="@color/colorProfileCardView"
                     >
                     <TextView
