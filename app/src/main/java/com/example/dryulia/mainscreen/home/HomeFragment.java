@@ -1,6 +1,5 @@
 package com.example.dryulia.mainscreen.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +8,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -18,7 +16,6 @@ import com.example.dryulia.mainscreen.MainScreenActivity;
 import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
 import com.example.dryulia.mainscreen.home.produk.ProdukFragment;
 import com.example.dryulia.mainscreen.home.treatment.TreatmentFragment;
-import com.smarteist.autoimageslider.SliderLayout;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -51,8 +48,6 @@ public class HomeFragment extends Fragment {
 
         carouselView = view.findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
-
-
         cvKonsultasi = view.findViewById(R.id.cv_konsultasi);
         cvTreatment = view.findViewById(R.id.cv_treatment);
         cvProduk = view.findViewById(R.id.cv_produk);
@@ -120,8 +115,6 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity(), "Anda Memilih Rekam Medis ", Toast.LENGTH_SHORT).show();
             }
         });
-
-
 
         return view;
     }

@@ -151,6 +151,30 @@ public class KonsultasiFragment extends Fragment {
         this.sTanggalKonsultasi = sTanggalKonsultasi;
     }
 
+    public void setsDepan(String depan) {
+        this.depan = depan;
+    }
+
+    public String getsDepan() {
+        return depan;
+    }
+
+    public void setsKiri(String kiri) {
+        this.kiri = kiri;
+    }
+
+    public String getsKiri() {
+        return kiri;
+    }
+    public void setsKanan(String kanan) {
+        this.kanan = kanan;
+    }
+
+    public String getsKanan() {
+        return kanan;
+    }
+
+
     @Override
     public void onResume() {
         super.onResume();
