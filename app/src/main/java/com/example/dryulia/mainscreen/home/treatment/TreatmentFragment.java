@@ -65,5 +65,6 @@ public class TreatmentFragment extends Fragment {
         adapter = new TreatmentAdapter(treatments, R.layout.item_treatment, getActivity());
         treatmentRecyclerView.setAdapter(adapter);
 
+
     }
 }

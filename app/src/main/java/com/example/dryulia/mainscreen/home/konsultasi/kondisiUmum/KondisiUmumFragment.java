@@ -26,6 +26,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 import com.example.dryulia.R;
 import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
 import java.io.File;
@@ -77,6 +79,30 @@ public class KondisiUmumFragment extends Fragment {
         depanImage = view.findViewById(R.id.img_depan);
         motherImage = view.findViewById(R.id.mother_image);
         reTake = view.findViewById(R.id.retake);
+        Bitmap bit;
+
+        if (KonsultasiFragment.getInstance().getsKiri() != null){
+            Glide.with(getActivity())
+                    .load(KonsultasiFragment.getInstance().getsKiri()).into(kiriImage);
+            Glide.with(getActivity())
+                    .load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
+            reTake.setVisibility(View.VISIBLE);
+
+        }if (KonsultasiFragment.getInstance().getsKanan() != null){
+            Glide.with(getActivity())
+                    .load(KonsultasiFragment.getInstance().getsKanan()).into(kananImage);
+            Glide.with(getActivity())
+                    .load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
+            reTake.setVisibility(View.VISIBLE);
+        }
+        if (KonsultasiFragment.getInstance().getsDepan() != null) {
+            Glide.with(getActivity())
+                    .load(KonsultasiFragment.getInstance().getsDepan()).into(depanImage);
+            Glide.with(getActivity())
+                    .load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
+            reTake.setVisibility(View.VISIBLE);
+        }
+
         reTake.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -222,22 +248,26 @@ public class KondisiUmumFragment extends Fragment {
                     bitmap = BitmapFactory.decodeFile(selectedImage.getEncodedPath());
                     //1 depan, 2 kiri, 3 kanan
                     switch (tmp){
-                        case 1:
+                        case 1://depan
+                            KonsultasiFragment.getInstance().setsDepan(selectedImage.getEncodedPath().toString());
                             motherImage.setImageBitmap(bitmap);
                             depanImage.setImageBitmap(bitmap);
                             reTake.setVisibility(View.VISIBLE);
                             Toast.makeText(getActivity(), "foto depan", Toast.LENGTH_SHORT).show();
                             break;
-                        case 2 :
+                        case 2 : //kiri
+                            KonsultasiFragment.getInstance().setsKiri(selectedImage.getEncodedPath().toString());
                             motherImage.setImageBitmap(bitmap);
                             kiriImage.setImageBitmap(bitmap);
                             reTake.setVisibility(View.VISIBLE);
                             Toast.makeText(getContext(), "foto kiri", Toast.LENGTH_SHORT).show();
                             break;
-                        case 3 :
+                        case 3 ://kanan
+                            KonsultasiFragment.getInstance().setsKanan(selectedImage.getEncodedPath().toString());
                             motherImage.setImageBitmap(bitmap);
                             kananImage.setImageBitmap(bitmap);
                             reTake.setVisibility(View.VISIBLE);
+                            Log.d("coba ", KonsultasiFragment.getInstance().getsKanan());
                             Toast.makeText(getActivity(), "foto kanan", Toast.LENGTH_SHORT).show();
                             break;
                         default :

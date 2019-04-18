@@ -50,10 +50,7 @@ public class KonsultasiFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pilihlayananFragment = new PilihLayananFragment();
-        kondisiUmumFragment = new KondisiUmumFragment();
-        bookingFragment = new BookingFragment();
-        antrianFragment = new AntrianFragment();
+
     }
 
     @Override
@@ -65,13 +62,18 @@ public class KonsultasiFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        pilihlayananFragment = new PilihLayananFragment();
+        kondisiUmumFragment = new KondisiUmumFragment();
+        bookingFragment = new BookingFragment();
+        antrianFragment = new AntrianFragment();
         instance = this;
         initStepList();
         stepView = view.findViewById(R.id.step_view);
         stepView.setSteps(stepList);
-        Fragment pilihlayananFragment = new PilihLayananFragment();
+        //Fragment pilihlayananFragment = new PilihLayananFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.content_konsultasi, pilihlayananFragment).commit();
+
         stepView.setOnStepClickListener(new StepView.OnStepClickListener() {
             @Override
             public void onStepClick(int step) {

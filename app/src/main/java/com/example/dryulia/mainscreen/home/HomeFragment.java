@@ -62,7 +62,6 @@ public class HomeFragment extends Fragment {
             }
         };
         carouselView.setImageListener(imageListener);
-
         konsultasiFragment = new KonsultasiFragment();
         treatmentFragment = new TreatmentFragment();
         produkFragment = new ProdukFragment();

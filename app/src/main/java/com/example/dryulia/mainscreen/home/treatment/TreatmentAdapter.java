@@ -25,7 +25,6 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.Trea
     private Context context;
     private ArrayList<TreatmentModel> treatmentModelArrayList;
     private View view;
-    boolean showFirst = true;
 
 
     public TreatmentAdapter(Context context) {
@@ -57,6 +56,7 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.Trea
                 .load(treatmentModel.getImage_url())
                 .apply(new RequestOptions().override(300, 200))
                 .into(treatmentItemViewHolder.imgPhoto);
+        final boolean[] showFirst = new boolean[1];
         treatmentItemViewHolder.judulTreatment.setText(treatmentModel.getNamaTreatment());
         treatmentItemViewHolder.detailTreatment.setText(treatmentModel.getDetailTreatment());
         treatmentItemViewHolder.hargaTreatment.setText(String.valueOf(treatmentModel.getHargaTreatment()));
@@ -64,12 +64,12 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.Trea
             @Override
             public void onClick(View v) {
                 Log.d("posisi", treatmentModel.getIndex()+"" );
-                if (showFirst == true){
+                if (showFirst[0] == false){
                     treatmentItemViewHolder.imgStatus.setImageResource(R.drawable.ic_treatment_true);
-                    showFirst = false;
+                    showFirst[0] = true;
                 }else{
                     treatmentItemViewHolder.imgStatus.setImageResource(R.drawable.ic_treatment_false);
-                    showFirst = true;
+                    showFirst[0] = false;
                 }
 
             }
