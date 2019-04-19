@@ -133,12 +133,17 @@
                                     android:text="On Klinik"/>
                             </RelativeLayout>
 
-                            <android.support.v7.widget.RecyclerView
-                                android:id="@+id/rv_treatment"
+                            <ScrollView
                                 android:layout_width="match_parent"
-                                android:layout_height="216dp"
-                                android:layout_marginBottom="@dimen/_55sdp"
-                                tools:listitem="@layout/item_treatment_medical_advice" />
+                                android:layout_height="wrap_content">
+                                <android.support.v7.widget.RecyclerView
+                                    android:id="@+id/rv_treatment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    tools:listitem="@layout/item_treatment_medical_advice" />
+
+                            </ScrollView>
+
 
                         </LinearLayout>
 
@@ -172,8 +177,7 @@
                                 android:id="@+id/rv_produk_"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                tools:listitem="@layout/item_treatment"
-                                android:layout_marginBottom="@dimen/_55sdp"
+                                tools:listitem="@layout/item_produk_medical_advice"
                                 />
                         </LinearLayout>
                     </LinearLayout>

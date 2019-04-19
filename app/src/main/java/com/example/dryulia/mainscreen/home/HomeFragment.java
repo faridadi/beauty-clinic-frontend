@@ -16,7 +16,7 @@ import com.example.dryulia.mainscreen.MainScreenActivity;
 import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
 import com.example.dryulia.mainscreen.home.produk.ProdukFragment;
 import com.example.dryulia.mainscreen.home.treatment.TreatmentFragment;
-import com.example.dryulia.mainscreen.medicaladvice.MedicalAdviceFragment;
+import com.example.dryulia.mainscreen.home.medicaladvice.MedicalAdviceFragment;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
