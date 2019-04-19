@@ -44,7 +44,7 @@ public class BookingFragment extends Fragment {
     ImageView barcodeImage, imgAnamnesa;
     TextView barcodeText;
     Dialog myDialog;
-    CardView a;
+    CardView a, kondisiUmum;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,11 +68,20 @@ public class BookingFragment extends Fragment {
         btnNext = view.findViewById(R.id.btn_booking_next);
         btnCancel = view.findViewById(R.id.btn_booking_cancel);
         imgAnamnesa = view.findViewById(R.id.booking_anamnesa);
+        kondisiUmum = view.findViewById(R.id.cv_booking_kondisi_umum);
+        kondisiUmum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showKondisiUmumDialog();
+
+            }
+        });
+
         a = view.findViewById(R.id.a);
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+                showAnamnesaDialog();
             }
         });
 
@@ -128,15 +137,9 @@ public class BookingFragment extends Fragment {
             }
         });
 
-        imgAnamnesa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
-    private void showDialog() {
+    private void showAnamnesaDialog() {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setCancelable(true);
 
@@ -149,6 +152,23 @@ public class BookingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+    private void showKondisiUmumDialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setCancelable(true);
+
+        View view  = getActivity().getLayoutInflater().inflate(R.layout.popup_kondisi_umum, null);
+        dialog.setContentView(view);
+
+        final ImageView exit = view.findViewById(R.id.img_popup_kondisiumum_exit);
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
         dialog.show();
