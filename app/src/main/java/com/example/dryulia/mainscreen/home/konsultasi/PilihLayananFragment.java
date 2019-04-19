@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dryulia.R;
+import com.example.dryulia.model.Konsul;
 
 import java.util.Calendar;
 
@@ -52,18 +53,20 @@ public class PilihLayananFragment extends Fragment {
         btnSimpan = view.findViewById(R.id.btn_simpan_pilihLayanan);
         edtKeluhan = view.findViewById(R.id.edt_keluhan);
         edtAreaKeluhan = view.findViewById(R.id.edt_area_keluhan);
-        edtLamaKeluhan = view.findViewById(R.id.edt_riwayat_cream);
+        edtLamaKeluhan = view.findViewById(R.id.edt_lama_keluhan);
         edtRiwayatCream = view.findViewById(R.id.edt_riwayat_cream);
         edtRiwayatPerawatan = view.findViewById(R.id.edt_riwayat_perawatan);
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                KonsultasiFragment.getInstance().setsKeluhan(edtKeluhan.getText().toString());
-                KonsultasiFragment.getInstance().setsAreaKeluhan(edtAreaKeluhan.getText().toString());
-                KonsultasiFragment.getInstance().setsLamaKeluhan(edtLamaKeluhan.getText().toString());
-                KonsultasiFragment.getInstance().setsRiwayatCream(edtRiwayatCream.getText().toString());
-                KonsultasiFragment.getInstance().setsCalendar(c);
-               KonsultasiFragment.getInstance().setStep(1);
+                KonsultasiFragment.getInstance().getsKonsul().setKeluhan(edtKeluhan.getText().toString());
+                KonsultasiFragment.getInstance().getsKonsul().setArea(edtAreaKeluhan.getText().toString());
+                KonsultasiFragment.getInstance().getsKonsul().setLama(edtLamaKeluhan.getText().toString());
+                KonsultasiFragment.getInstance().getsKonsul().setRiwayatobat(edtRiwayatCream.getText().toString());
+                KonsultasiFragment.getInstance().getsKonsul().setRiwayatPerawatan(edtRiwayatPerawatan.getText().toString());
+                KonsultasiFragment.getInstance().getsKonsul().setDate("tanggal");
+                //set data intance untuk interface data antar fragment konusltasi
+                KonsultasiFragment.getInstance().setStep(1);
             }
         });
         imgTanggal = view.findViewById(R.id.ic_calendar);

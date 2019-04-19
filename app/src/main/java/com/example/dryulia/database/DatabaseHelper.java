@@ -105,6 +105,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
     public Konsul getKonsul(){
         SQLiteDatabase db = this.getReadableDatabase();
+
         try{
             String selectQuery = "SELECT * FROM konsul";
             Cursor cursor = db.rawQuery(selectQuery, null);

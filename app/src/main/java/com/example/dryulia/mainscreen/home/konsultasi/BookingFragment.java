@@ -49,6 +49,7 @@ public class BookingFragment extends Fragment {
     Dialog myDialog;
     CardView a, kondisiUmum;
     DatabaseHelper db;
+    Konsul konsul;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,13 @@ public class BookingFragment extends Fragment {
         barcodeText = view.findViewById(R.id.booking_code);
         btnNext = view.findViewById(R.id.btn_booking_next);
         btnCancel = view.findViewById(R.id.btn_booking_cancel);
+
+        //memilih data untuk dimasukkan di modal dialog
+        if (!db.cekKonsul()){
+            konsul = db.getKonsul();
+        }else{
+            konsul = KonsultasiFragment.getInstance().getsKonsul();
+        }
 
         imgAnamnesa = view.findViewById(R.id.booking_anamnesa);
         kondisiUmum = view.findViewById(R.id.cv_booking_kondisi_umum);
@@ -110,10 +118,11 @@ public class BookingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //cek data di temporary dan database konsultasi
-                if (!TextUtils.isEmpty(KonsultasiFragment.getInstance().getsBarcode())||db.cekKonsul()){
-                    Bitmap bitmap = generateBarcode(KonsultasiFragment.getInstance().getsBarcode(),200,200);
+                if (db.cekKonsul()){
+                    Konsul ko = db.getKonsul();
+                    Bitmap bitmap = generateBarcode(ko.getBarcode(),200,200);
                     barcodeImage.setImageBitmap(bitmap);
-                    barcodeText.setText(KonsultasiFragment.getInstance().getsBarcode());
+                    barcodeText.setText(ko.getBarcode());
                     barcodeText.setVisibility(View.VISIBLE);
                     btnCancel.setVisibility(View.INVISIBLE);
                     Log.d("Barcode", "Barcode sudah di add");
@@ -127,7 +136,17 @@ public class BookingFragment extends Fragment {
                             //get data barcode from server, save to local database, save new data konsul to database
                             db.deleteAllKonsul();
                             //data didapat dari getInstance
-                            db.insertKonsul(new Konsul("Keluhan","area","lama","riwayatobat", "riwayatPerawatan", "date", "depan", "kiri", "kanan", text));
+                            db.insertKonsul(new Konsul(
+                                    KonsultasiFragment.getInstance().getsKonsul().getKeluhan(),
+                                    KonsultasiFragment.getInstance().getsKonsul().getArea(),
+                                    KonsultasiFragment.getInstance().getsKonsul().getLama(),
+                                    KonsultasiFragment.getInstance().getsKonsul().getRiwayatobat(),
+                                    KonsultasiFragment.getInstance().getsKonsul().getRiwayatPerawatan(),
+                                    KonsultasiFragment.getInstance().getsKonsul().getDate(),
+                                    KonsultasiFragment.getInstance().getsKonsul().getDepan(),
+                                    KonsultasiFragment.getInstance().getsKonsul().getKiri(),
+                                    KonsultasiFragment.getInstance().getsKonsul().getKanan(),
+                                    text));
                             try {
                                 //generate barcode from text
                                 Bitmap bitmap = generateBarcode(text,200,200);
@@ -135,7 +154,7 @@ public class BookingFragment extends Fragment {
                                     Log.d("Barcode", "Error generate Barcode");
                                     return;
                                 }
-                                KonsultasiFragment.getInstance().setsBarcode(text);
+                                KonsultasiFragment.getInstance().getsKonsul().setBarcode(text);
                                 barcodeImage.setImageBitmap(bitmap);
                                 barcodeText.setText(text);
                                 barcodeText.setVisibility(View.VISIBLE);
@@ -183,7 +202,16 @@ public class BookingFragment extends Fragment {
         View view  = getActivity().getLayoutInflater().inflate(R.layout.popup_anamnesa, null);
         dialog.setContentView(view);
         final ImageView exit = view.findViewById(R.id.img_popup_anamnesa_exit);
-
+        final TextView keluhan = view.findViewById(R.id.tv_popup_keluhan);
+        final TextView area = view.findViewById(R.id.tv_popup_area_keluhan);
+        final TextView lama = view.findViewById(R.id.tv_popup_lama_keluhan);
+        final TextView riwayatCream = view.findViewById(R.id.tv_popup_riwayat_cream);
+        final TextView riwayatPerawtan = view.findViewById(R.id.tv_popup_riwayat_perawatan);
+        keluhan.setText(konsul.getKeluhan());
+        area.setText(konsul.getArea());
+        lama.setText(konsul.getLama());
+        riwayatCream.setText(konsul.getRiwayatobat());
+        riwayatPerawtan.setText(konsul.getRiwayatPerawatan());
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,10 +223,8 @@ public class BookingFragment extends Fragment {
     private void showKondisiUmumDialog() {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setCancelable(true);
-
         View view  = getActivity().getLayoutInflater().inflate(R.layout.popup_kondisi_umum, null);
         dialog.setContentView(view);
-
         final ImageView exit = view.findViewById(R.id.img_popup_kondisiumum_exit);
 
         exit.setOnClickListener(new View.OnClickListener() {

@@ -36,7 +36,7 @@ import java.io.File;
 public class KondisiUmumFragment extends Fragment {
 
     private View view;
-    Button btnSimpan, reTake;
+    Button btnSimpan, reTake, btnBack;
     CardView depan, kiri, kanan;
     ImageView motherImage;
     ImageView depanImage;//1
@@ -82,27 +82,33 @@ public class KondisiUmumFragment extends Fragment {
         depanImage = view.findViewById(R.id.img_depan);
         motherImage = view.findViewById(R.id.mother_image);
         reTake = view.findViewById(R.id.retake);
-        Bitmap bit;
-
-        if (KonsultasiFragment.getInstance().getsKiri() != null){
-            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKiri()).into(kiriImage);
-            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
-            reTake.setVisibility(View.VISIBLE);
-            wajah.setText("Kiri");
-
-        }if (KonsultasiFragment.getInstance().getsKanan() != null){
-            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKanan()).into(kananImage);
-            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
-            reTake.setVisibility(View.VISIBLE);
-            wajah.setText("Kanan");
+        btnBack = view.findViewById(R.id.btn_kembali_kondisiUmum);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                KonsultasiFragment.getInstance().setStep(0);
+            }
+        });
+        if (KonsultasiFragment.getInstance().getsKonsul() != null) {
+            if (KonsultasiFragment.getInstance().getsKonsul().getKiri() != null) {
+                Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKonsul().getKiri()).into(kiriImage);
+                Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKonsul().getKiri()).into(motherImage);
+                reTake.setVisibility(View.VISIBLE);
+                wajah.setText("Kiri");
+            }
+            if (KonsultasiFragment.getInstance().getsKonsul().getKanan() != null) {
+                Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKonsul().getKanan()).into(kananImage);
+                Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKonsul().getKanan()).into(motherImage);
+                reTake.setVisibility(View.VISIBLE);
+                wajah.setText("Kanan");
+            }
+            if (KonsultasiFragment.getInstance().getsKonsul().getDepan() != null) {
+                Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKonsul().getDepan()).into(depanImage);
+                Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKonsul().getDepan()).into(motherImage);
+                reTake.setVisibility(View.VISIBLE);
+                wajah.setText("Depan");
+            }
         }
-        if (KonsultasiFragment.getInstance().getsDepan() != null) {
-            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsDepan()).into(depanImage);
-            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
-            reTake.setVisibility(View.VISIBLE);
-            wajah.setText("Depan");
-        }
-
         reTake.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -246,7 +252,8 @@ public class KondisiUmumFragment extends Fragment {
                     //1 depan, 2 kiri, 3 kanan
                     switch (tmp){
                         case 1://depan
-                            KonsultasiFragment.getInstance().setsDepan(selectedImage.getEncodedPath().toString());
+                            Toast.makeText(getActivity(), ""+selectedImage.getEncodedPath().toString(), Toast.LENGTH_SHORT).show();
+                            KonsultasiFragment.getInstance().getsKonsul().setDepan(selectedImage.getEncodedPath().toString());
                             wajah.setText("Depan");
                             Glide.with(getActivity()).load(imageUri).into(depanImage);
                             Glide.with(getActivity()).load(imageUri).into(motherImage);
@@ -254,18 +261,18 @@ public class KondisiUmumFragment extends Fragment {
                             Toast.makeText(getActivity(), "Foto Depan", Toast.LENGTH_SHORT).show();
                             break;
                         case 2 : //kiri
-                            KonsultasiFragment.getInstance().setsKiri(selectedImage.getEncodedPath().toString());
+                            KonsultasiFragment.getInstance().getsKonsul().setKiri(selectedImage.getEncodedPath().toString());
                             Glide.with(getActivity()).load(imageUri).into(kiriImage);
                             Glide.with(getActivity()).load(imageUri).into(motherImage);
                             reTake.setVisibility(View.VISIBLE);
                             Toast.makeText(getContext(), "Foto Kiri", Toast.LENGTH_SHORT).show();
                             break;
                         case 3 ://kanan
-                            KonsultasiFragment.getInstance().setsKanan(selectedImage.getEncodedPath().toString());
+                            KonsultasiFragment.getInstance().getsKonsul().setKanan(selectedImage.getEncodedPath().toString());
                             Glide.with(getActivity()).load(imageUri).into(kananImage);
                             Glide.with(getActivity()).load(imageUri).into(motherImage);
                             reTake.setVisibility(View.VISIBLE);
-                            Log.d("coba ", KonsultasiFragment.getInstance().getsKanan());
+                            Log.d("coba ", KonsultasiFragment.getInstance().getsKonsul().getKanan());
                             Toast.makeText(getActivity(), "Doto Kanan", Toast.LENGTH_SHORT).show();
                             break;
                         default :
