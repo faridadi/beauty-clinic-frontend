@@ -22,6 +22,7 @@ public class KonsultasiFragment extends Fragment {
     //Pilih Layanan Fragment
     private String sKeluhan, sAreaKeluhan, sLamaKeluhan, sRiwayatCream, sRiwayatPerawatan, sTanggalKonsultasi, depan, kiri, kanan, barcode;
     private Calendar sCalendar;
+    private Konsul konsul;
 
     public Calendar getsCalendar() {
         return sCalendar;
@@ -183,7 +184,13 @@ public class KonsultasiFragment extends Fragment {
     public void setsBarcode(String barcode) {
         this.barcode = barcode;
     }
+    public Konsul getsKonsul() {
+        return konsul;
+    }
 
+    public void setsKonsul(Konsul konsul) {
+        this.konsul = konsul;
+    }
 
     @Override
     public void onResume() {

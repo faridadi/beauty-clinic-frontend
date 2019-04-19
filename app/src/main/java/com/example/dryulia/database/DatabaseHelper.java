@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.dryulia.model.Bill;
 import com.example.dryulia.model.Event;
@@ -64,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
 //==========KONSUL==========
     public boolean insertKonsul(Konsul konsul){
         //check data user ada atau tidak
-        if (cekKonsul()){
+        if (!cekKonsul()){
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("keluhan", konsul.getKeluhan());
@@ -106,8 +108,10 @@ public class DatabaseHelper extends SQLiteOpenHelper
         try{
             String selectQuery = "SELECT * FROM konsul";
             Cursor cursor = db.rawQuery(selectQuery, null);
+            Log.e("getKonsul", ""+cursor.getCount());
             if(cursor.getCount() > 0) {
                 Konsul data = new Konsul();
+                cursor.moveToFirst();
                 data.setId              (cursor.getInt(cursor.getColumnIndex("id")));
                 data.setKeluhan         (cursor.getString(cursor.getColumnIndex("keluhan")));
                 data.setArea            (cursor.getString(cursor.getColumnIndex("area")));
@@ -118,7 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 data.setDepan           (cursor.getString(cursor.getColumnIndex("depan")));
                 data.setKiri            (cursor.getString(cursor.getColumnIndex("kiri")));
                 data.setKanan           (cursor.getString(cursor.getColumnIndex("kanan")));
-                data.setBarcode           (cursor.getString(cursor.getColumnIndex("barcode")));
+                data.setBarcode         (cursor.getString(cursor.getColumnIndex("barcode")));
                 return data;
             }else {
                 return null;

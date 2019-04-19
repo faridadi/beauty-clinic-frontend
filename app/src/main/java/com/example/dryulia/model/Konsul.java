@@ -29,6 +29,18 @@ public class Konsul {
         this.kanan = kanan;
         this.barcode = barcode;
     }
+    public Konsul(String keluhan, String area, String lama, String riwayatobat, String riwayatPerawatan, String date, String depan, String kiri, String kanan, String barcode) {
+        this.keluhan = keluhan;
+        this.area = area;
+        this.lama = lama;
+        this.riwayatobat = riwayatobat;
+        this.riwayatPerawatan = riwayatPerawatan;
+        this.date = date;
+        this.depan = depan;
+        this.kiri = kiri;
+        this.kanan = kanan;
+        this.barcode = barcode;
+    }
 
     public int getId() {
         return id;

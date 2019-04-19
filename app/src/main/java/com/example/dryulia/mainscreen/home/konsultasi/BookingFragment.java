@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,8 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.dryulia.R;
+import com.example.dryulia.database.DatabaseHelper;
+import com.example.dryulia.model.Konsul;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -45,6 +48,7 @@ public class BookingFragment extends Fragment {
     TextView barcodeText;
     Dialog myDialog;
     CardView a, kondisiUmum;
+    DatabaseHelper db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,12 +67,16 @@ public class BookingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         AndroidNetworking.initialize(getContext());
+        db = new DatabaseHelper(getActivity());
         barcodeImage = view.findViewById(R.id.img_barcode);
         barcodeText = view.findViewById(R.id.booking_code);
         btnNext = view.findViewById(R.id.btn_booking_next);
         btnCancel = view.findViewById(R.id.btn_booking_cancel);
+
         imgAnamnesa = view.findViewById(R.id.booking_anamnesa);
         kondisiUmum = view.findViewById(R.id.cv_booking_kondisi_umum);
+
+        //Show dialog untuk kondisi
         kondisiUmum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +84,7 @@ public class BookingFragment extends Fragment {
 
             }
         });
-
+        //show anamnesa
         a = view.findViewById(R.id.a);
         a.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,65 +95,93 @@ public class BookingFragment extends Fragment {
 
 
 
+        //cek data konsul di database jika tidak ada koneksi atau offline
+        if (db.cekKonsul()){
+            Konsul ko = db.getKonsul();
+            Bitmap bitmap = generateBarcode(ko.getBarcode(),200,200);
+            barcodeImage.setImageBitmap(bitmap);
+            barcodeText.setText(ko.getBarcode());
+            barcodeText.setVisibility(View.VISIBLE);
+            btnCancel.setVisibility(View.INVISIBLE);
+        }
 
-
-
-
-
-
-
-        final Fragment activity = this;
-
+        //Tombol save akhir
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //KonsultasiFragment.getInstance().setStep(3);
-                AndroidNetworking.get("https://api.myjson.com/bins/158wds")
-                        .build().getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("json", response.toString());
-                        String text=response.toString(); // Whatever you need to encode in the QR code
-                        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-                        try {
-                            BitMatrix bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE,200,200);
-                            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-                            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-                            barcodeImage.setImageBitmap(bitmap);
-                            barcodeText.setText(text);
-                            barcodeText.setVisibility(View.VISIBLE);
-                            btnCancel.setVisibility(View.INVISIBLE);
-                        } catch (WriterException e) {
-                            e.printStackTrace();
+                //cek data di temporary dan database konsultasi
+                if (!TextUtils.isEmpty(KonsultasiFragment.getInstance().getsBarcode())||db.cekKonsul()){
+                    Bitmap bitmap = generateBarcode(KonsultasiFragment.getInstance().getsBarcode(),200,200);
+                    barcodeImage.setImageBitmap(bitmap);
+                    barcodeText.setText(KonsultasiFragment.getInstance().getsBarcode());
+                    barcodeText.setVisibility(View.VISIBLE);
+                    btnCancel.setVisibility(View.INVISIBLE);
+                    Log.d("Barcode", "Barcode sudah di add");
+                }else{// user melakukan save data ke server
+                    AndroidNetworking.get("https://api.myjson.com/bins/158wds")
+                            .build().getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {//mendapat data dari server berupa barcode yang akan disimpan dalam database
+                            Log.d("json", response.toString());
+                            String text=response.toString(); // Whatever you need to encode in the QR code
+                            //get data barcode from server, save to local database, save new data konsul to database
+                            db.deleteAllKonsul();
+                            //data didapat dari getInstance
+                            db.insertKonsul(new Konsul("Keluhan","area","lama","riwayatobat", "riwayatPerawatan", "date", "depan", "kiri", "kanan", text));
+                            try {
+                                //generate barcode from text
+                                Bitmap bitmap = generateBarcode(text,200,200);
+                                if (bitmap==null){
+                                    Log.d("Barcode", "Error generate Barcode");
+                                    return;
+                                }
+                                KonsultasiFragment.getInstance().setsBarcode(text);
+                                barcodeImage.setImageBitmap(bitmap);
+                                barcodeText.setText(text);
+                                barcodeText.setVisibility(View.VISIBLE);
+                                btnCancel.setVisibility(View.INVISIBLE);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("error", anError.toString());
-                    }
-                });
-
+                        @Override
+                        public void onError(ANError anError) {
+                            Log.d("error", anError.toString());
+                        }
+                    });
+                }
             }
         });
 
+        //tombol untuk ke
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //KonsultasiFragment.getInstance().setStep(1);
-                //
+                db.deleteAllKonsul();
+                KonsultasiFragment.getInstance().setStep(1);
             }
         });
 
     }
 
+    private Bitmap generateBarcode(String url, int width, int height){
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(url, BarcodeFormat.QR_CODE,width,height);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            return bitmap;
+        } catch (WriterException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private void showAnamnesaDialog() {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setCancelable(true);
-
         View view  = getActivity().getLayoutInflater().inflate(R.layout.popup_anamnesa, null);
         dialog.setContentView(view);
-
         final ImageView exit = view.findViewById(R.id.img_popup_anamnesa_exit);
 
         exit.setOnClickListener(new View.OnClickListener() {
