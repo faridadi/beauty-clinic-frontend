@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".mainscreen.MainScreenActivity"
+            android:name=".auth.LoginActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,11 +32,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auth.LoginActivity"></activity>
         <activity
             android:name=".auth.RegisterActivity"
             android:theme="@style/AppThemeRegister"></activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".mainscreen.MainScreenActivity"></activity>
     </application>
 
 </manifest>

@@ -37,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         //Type 1 = produk, 2 = Treatment, konsul, 3 = voucher
         db.execSQL("Create table bill(id INTEGER PRIMARY KEY, nama TEXT, harga INT, jumlah INT, kode TEXT, type INT)");
         db.execSQL("Create table treatment(id INTEGER PRIMARY KEY, nama TEXT, kode TEXT, harga INT, des TEXT)");
-        db.execSQL("Create table event(id INTEGER PRIMARY KEY, nama TEXT, kode TEXT, nama TEXT, des TEXT)");
+        db.execSQL("Create table event(id INTEGER PRIMARY KEY, nama TEXT, kode TEXT, des TEXT)");
         //Type 1 = percent, 2 = harga
         db.execSQL("Create table voucher(id INTEGER PRIMARY KEY, nama TEXT, kode TEXT, des TEXT, type INT, percen INTEGER, harga INTEGER)");
         //Type 1 = produk, 2 = Treatment, konsul, 3 = voucher
@@ -143,7 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
 //===========USER============
     public boolean insertUser(User user){
         //check data user ada atau tidak
-        if (cekUser()){
+        if (!cekUser()){
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("iduser", user.getIdUser());
@@ -165,6 +165,18 @@ public class DatabaseHelper extends SQLiteOpenHelper
             return false;
         }
     }
+
+    public boolean loginUser(String uname){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM user WHERE uname = ?",new String[] {uname});
+        if (c != null && c.getCount() > 0){
+            return true;
+        }else {
+            //jika data user tidak ada maka akan mmembuat user baru dengan password default "admin"
+            return false;
+        }
+    }
+
     //mengecek data user apakah sudah ada didalam database
     public boolean cekUser(){
         SQLiteDatabase db = this.getReadableDatabase();

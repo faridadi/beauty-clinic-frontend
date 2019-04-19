@@ -44,7 +44,7 @@ public class BookingFragment extends Fragment {
     ImageView barcodeImage, imgAnamnesa;
     TextView barcodeText;
     Dialog myDialog;
-    CardView a, kondisiUmum;
+    CardView a;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,19 +68,11 @@ public class BookingFragment extends Fragment {
         btnNext = view.findViewById(R.id.btn_booking_next);
         btnCancel = view.findViewById(R.id.btn_booking_cancel);
         imgAnamnesa = view.findViewById(R.id.booking_anamnesa);
-        kondisiUmum = view.findViewById(R.id.cv_booking_kondisi_umum);
-        kondisiUmum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogAKondisiUmum();
-            }
-        });
-
         a = view.findViewById(R.id.a);
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogAnamnes();
+                showDialog();
             }
         });
 
@@ -144,7 +136,7 @@ public class BookingFragment extends Fragment {
         });
     }
 
-    private void showDialogAnamnes() {
+    private void showDialog() {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setCancelable(true);
 
@@ -161,24 +153,6 @@ public class BookingFragment extends Fragment {
         });
         dialog.show();
     }
-    private void showDialogAKondisiUmum() {
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.setCancelable(true);
-
-        View view  = getActivity().getLayoutInflater().inflate(R.layout.popup_kondisi_umum, null);
-        dialog.setContentView(view);
-
-        final ImageView exit = view.findViewById(R.id.img_popup_kondisiumum_exit);
-
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);

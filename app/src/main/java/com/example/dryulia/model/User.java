@@ -20,6 +20,15 @@ public class User {
         this.authtoken = authtoken;
         this.token = token;
     }
+    public User(String idUser, String nama, String phone, String email, String uname, String authtoken, String token) {
+        this.idUser = idUser;
+        this.nama = nama;
+        this.phone = phone;
+        this.email = email;
+        this.uname = uname;
+        this.authtoken = authtoken;
+        this.token = token;
+    }
 
     public int getId() {
         return id;
