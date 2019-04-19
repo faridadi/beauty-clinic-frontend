@@ -3,31 +3,38 @@ package com.example.dryulia.model;
 public class User {
     private int id;
     private String idUser;
-    private String nama;
+    private String name;
     private String phone;
     private String email;
+    private String address;
     private String uname;
-    private String authtoken;
-    private String token;
+    private String token_acc;
+    private String token_gcm;
 
-    public User(int id, String idUser, String nama, String phone, String email, String uname, String authtoken, String token) {
+    public User(int id, String idUser, String name, String phone, String email,String address, String uname, String token_acc, String token_gcm) {
         this.id = id;
         this.idUser = idUser;
-        this.nama = nama;
+        this.name = name;
         this.phone = phone;
         this.email = email;
+        this.address = address;
         this.uname = uname;
-        this.authtoken = authtoken;
-        this.token = token;
+        this.token_acc = token_acc;
+        this.token_gcm = token_gcm;
     }
-    public User(String idUser, String nama, String phone, String email, String uname, String authtoken, String token) {
+    public  User(){
+
+    }
+
+    public User(String idUser, String name, String phone, String email, String address, String uname, String token_acc, String token_gcm) {
         this.idUser = idUser;
-        this.nama = nama;
+        this.name = name;
         this.phone = phone;
         this.email = email;
+        this.address = address;
         this.uname = uname;
-        this.authtoken = authtoken;
-        this.token = token;
+        this.token_acc = token_acc;
+        this.token_gcm = token_gcm;
     }
 
     public int getId() {
@@ -46,12 +53,12 @@ public class User {
         this.idUser = idUser;
     }
 
-    public String getNama() {
-        return nama;
+    public String getName() {
+        return name;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setName(String nama) {
+        this.name = nama;
     }
 
     public String getPhone() {
@@ -70,6 +77,14 @@ public class User {
         this.email = email;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getUname() {
         return uname;
     }
@@ -78,19 +93,19 @@ public class User {
         this.uname = uname;
     }
 
-    public String getAuthtoken() {
-        return authtoken;
+    public String getToken_acc() {
+        return token_acc;
     }
 
-    public void setAuthtoken(String authtoken) {
-        this.authtoken = authtoken;
+    public void setToken_acc(String token_acc) {
+        this.token_acc = token_acc;
     }
 
-    public String getToken() {
-        return token;
+    public String getToken_gcm() {
+        return token_gcm;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setToken_gcm(String token_gcm) {
+        this.token_gcm = token_gcm;
     }
 }

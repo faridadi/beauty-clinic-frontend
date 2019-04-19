@@ -40,8 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         regis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.insertUser(new User("235","Farid","1892", "asd@asd.asd"
-                        , "farid", "123124","32423"));
+
             }
         });
     }

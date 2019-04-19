@@ -6,16 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.dryulia.model.Bill;
-import com.example.dryulia.model.Event;
 import com.example.dryulia.model.Konsul;
 import com.example.dryulia.model.Medical;
 import com.example.dryulia.model.Produk;
 import com.example.dryulia.model.Treatment;
 import com.example.dryulia.model.User;
-import com.example.dryulia.model.Voucher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db) {
         // creating required tables
-        db.execSQL("Create table user(id INTEGER PRIMARY KEY,iduser TEXT, nama TEXT, phone TEXT, email TEXT, uname TEXT, authtoken TEXT , token TEXT)");
+        db.execSQL("Create table user(id INTEGER PRIMARY KEY,iduser TEXT, name TEXT, phone TEXT, email TEXT,address TEXT, uname TEXT, token_acc TEXT , token_gcm TEXT)");
         db.execSQL("Create table produk(id INTEGER PRIMARY KEY, nama TEXT, harga INTEGER, kode TEXT, des TEXT, img TEXT)");
         //Type 1 = produk, 2 = Treatment, konsul, 3 = voucher
         db.execSQL("Create table bill(id INTEGER PRIMARY KEY, nama TEXT, harga INT, jumlah INT, kode TEXT, type INT)");
@@ -125,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 data.setKanan           (cursor.getString(cursor.getColumnIndex("kanan")));
                 data.setBarcode         (cursor.getString(cursor.getColumnIndex("barcode")));
                 return data;
+
             }else {
                 return null;
             }
@@ -152,12 +150,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("iduser", user.getIdUser());
-            values.put("nama", user.getNama());
+            values.put("name", user.getName());
             values.put("phone", user.getPhone());
             values.put("email", user.getEmail());
+            values.put("address", user.getAddress());
             values.put("uname", user.getUname());
-            values.put("authtoken", user.getAuthtoken());
-            values.put("token", user.getToken());
+            values.put("token_acc", user.getToken_acc());
+            values.put("token_gcm", user.getToken_gcm());
             // insert row
             long ins = db.insert("user", null, values);
             // assigning tags to todo
@@ -169,6 +168,35 @@ public class DatabaseHelper extends SQLiteOpenHelper
         }else {
             return false;
         }
+    }
+
+    public User getUser(){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        try{
+            String selectQuery = "SELECT * FROM user";
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            Log.e("getKonsul", ""+cursor.getCount());
+            if(cursor.getCount() > 0) {
+                User data = new User();
+                cursor.moveToFirst();
+                data.setId          (cursor.getInt(cursor.getColumnIndex("id")));
+                data.setIdUser      (cursor.getString(cursor.getColumnIndex("iduser")));
+                data.setName        (cursor.getString(cursor.getColumnIndex("name")));
+                data.setPhone       (cursor.getString(cursor.getColumnIndex("phone")));
+                data.setEmail       (cursor.getString(cursor.getColumnIndex("email")));
+                data.setAddress     (cursor.getString(cursor.getColumnIndex("address")));
+                data.setUname       (cursor.getString(cursor.getColumnIndex("uname")));
+                data.setToken_acc   (cursor.getString(cursor.getColumnIndex("token_acc")));
+                data.setToken_gcm   (cursor.getString(cursor.getColumnIndex("token_gcm")));
+                return data;
+            }else {
+                return null;
+            }
+        }finally {
+            db.close();
+        }
+
     }
 
     public boolean loginUser(String uname){
@@ -193,6 +221,10 @@ public class DatabaseHelper extends SQLiteOpenHelper
             //jika data user tidak ada maka akan mmembuat user baru dengan password default "admin"
             return false;
         }
+    }
+
+    public boolean updateUser(){
+        return false;
     }
 
     public boolean deleteAllUser(){
