@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.dryulia.R;
 import com.example.dryulia.mainscreen.home.konsultasi.kondisiUmum.KondisiUmumFragment;
+import com.example.dryulia.model.Konsul;
 import com.shuhart.stepview.StepView;
 
 import java.util.ArrayList;
@@ -37,7 +38,6 @@ public class KonsultasiFragment extends Fragment {
     }
 
     private static KonsultasiFragment instance;
-
     public static KonsultasiFragment getInstance(){
         return instance;
     }
