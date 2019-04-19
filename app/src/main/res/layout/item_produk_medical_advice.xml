@@ -15,7 +15,7 @@
             android:backgroundTint="@color/colorCvMedicalAdvicedeep">
 
             <TextView
-                android:id="@+id/tv_treatment_medical_advice"
+                android:id="@+id/tv_medical_advice_produk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/_5sdp"
@@ -25,9 +25,9 @@
                 android:textColor="@color/colorWhite"
                 />
         </android.support.v7.widget.CardView>
-        
+
         <Button
-            android:id="@+id/button_beli_treatment_medical_advice"
+            android:id="@+id/button_beli_produk_medical_advice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Beli"

@@ -36,6 +36,11 @@
     <color name="colorCVDiagnosa">#EBEBEB</color>
     <color name="colorCvMedicalAdvicedeep">#BDBDBD</color>
 
+    <color name="colorBlueLoght">#9CA2FF</color>
+    <color name="colorGreenLight">#24CD6B</color>
+
+
+
 
 
 </resources>

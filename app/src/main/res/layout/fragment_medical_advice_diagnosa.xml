@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,44 +28,50 @@
                     android:text="Diagnosa"
                     android:textSize="@dimen/_13ssp"/>
                 <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/_8sdp"
-                    android:layout_margin="@dimen/_2sdp"
-                    android:backgroundTint="@color/colorCVDiagnosa"
-                    >
-                    <TextView
-                        android:id="@+id/edt_profile_retype_new_password"
+                    app:cardBackgroundColor="@color/colorRegister">
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="re-enter new password"
-                        android:textColor="@color/colorBackground"
-                        android:textColorHint="@color/colorBackground"
-                        android:textAlignment="center"
-                        android:text="@string/dummy_diagnisa"
-                        android:backgroundTint="@color/colorProfileCardView"
-                        android:paddingTop="@dimen/_10sdp"
-                        android:paddingBottom="@dimen/_10sdp"
-                        android:paddingLeft="@dimen/_10sdp"
-                        android:paddingRight="@dimen/_10sdp"
-                        />
+                        app:cardCornerRadius="@dimen/_8sdp"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:backgroundTint="@color/colorCVDiagnosa"
+                        >
+                        <TextView
+                            android:id="@+id/edt_profile_retype_new_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="re-enter new password"
+                            android:textColor="@color/colorBackground"
+                            android:textColorHint="@color/colorBackground"
+                            android:textAlignment="center"
+                            android:text="@string/dummy_diagnisa"
+                            android:backgroundTint="@color/colorProfileCardView"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:paddingRight="@dimen/_10sdp"
+                            />
+                    </android.support.v7.widget.CardView>
+
                 </android.support.v7.widget.CardView>
+
             </LinearLayout>
 
             <Button
-                android:id="@+id/button_profile_save_password"
+                android:id="@+id/button_medical_advice"
                 android:layout_width="@dimen/_180sdp"
                 android:layout_height="wrap_content"
                 android:text="Medical Advice"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/button_medical_advice"
                 android:layout_marginTop="@dimen/_20sdp"
+                android:paddingTop="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_20sdp"
                 android:layout_gravity="center"
-                android:backgroundTint="@color/colorCVDiagnosa"
                 android:layout_marginBottom="@dimen/_20sdp"/>
-
-
-
-
 
         </LinearLayout>
 
