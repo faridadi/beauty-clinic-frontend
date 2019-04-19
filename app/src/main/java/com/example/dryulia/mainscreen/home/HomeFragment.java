@@ -15,6 +15,7 @@ import com.example.dryulia.R;
 import com.example.dryulia.mainscreen.MainScreenActivity;
 import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
 import com.example.dryulia.mainscreen.home.produk.ProdukFragment;
+import com.example.dryulia.mainscreen.home.rekammedis.RekamMedisFragment;
 import com.example.dryulia.mainscreen.home.treatment.TreatmentFragment;
 import com.example.dryulia.mainscreen.home.medicaladvice.MedicalAdviceFragment;
 import com.synnapps.carouselview.CarouselView;
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment {
     private Fragment treatmentFragment;
     private Fragment produkFragment;
     private Fragment medicalAdviceFragment;
+    private Fragment rekamMedisFragment;
 
 
     public HomeFragment() {
@@ -68,6 +70,8 @@ public class HomeFragment extends Fragment {
         treatmentFragment = new TreatmentFragment();
         produkFragment = new ProdukFragment();
         medicalAdviceFragment = new MedicalAdviceFragment();
+        rekamMedisFragment = new RekamMedisFragment();
+
 
 
         cvKonsultasi.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +122,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Anda Memilih Rekam Medis ", Toast.LENGTH_SHORT).show();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, rekamMedisFragment ).commit();
             }
         });
 
