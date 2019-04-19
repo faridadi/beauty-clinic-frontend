@@ -98,7 +98,6 @@
             android:textColor="@color/colorWhite"
             android:background="@drawable/button_cancel"
             android:layout_marginRight="@dimen/_5sdp"/>
-
     </LinearLayout>
     </android.support.v7.widget.CardView>
     </android.support.v7.widget.CardView>

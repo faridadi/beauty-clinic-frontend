@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="@dimen/_20sdp"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="@dimen/_20sdp"
     android:layout_marginBottom="@dimen/_20sdp">
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -133,12 +133,15 @@
                                     android:text="On Klinik"/>
                             </RelativeLayout>
 
-                            <FrameLayout
-                                android:id="@+id/container_treatment_medical_advice"
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rv_treatment"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="216dp"
+                                android:layout_marginBottom="@dimen/_55sdp"
+                                tools:listitem="@layout/item_treatment_medical_advice" />
 
                         </LinearLayout>
+
                         <ImageView
                             android:src="@color/colorGreen"
                             android:layout_width="match_parent"
@@ -165,11 +168,13 @@
                                     android:text="Home Care"/>
                             </RelativeLayout>
 
-                            <FrameLayout
-                                android:id="@+id/container_produk_medical_advice"
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rv_produk_"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
-
+                                android:layout_height="wrap_content"
+                                tools:listitem="@layout/item_treatment"
+                                android:layout_marginBottom="@dimen/_55sdp"
+                                />
                         </LinearLayout>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
