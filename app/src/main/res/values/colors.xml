@@ -22,6 +22,7 @@
     <color name="colorBookingRed">#D64D24</color>
 
     <color name="colorOrange">#FE923E</color>
+    <color name="colorCvNotification">#D3E1D9</color>
     
     //ButtonBooking
     <color name="colorBookingCancel">#D1021F</color>
@@ -31,7 +32,9 @@
     <color name="colorRegister">#979694</color>
 
     <color name="colorProfileBackground">#F6F6F6</color>
-    <color name="colorProfileCardView">#D7D7D7</color>
+    <color name="colorProfileCardView">#D3E1D9</color>
+    <color name="colorCVDiagnosa">#EBEBEB</color>
+    <color name="colorCvMedicalAdvicedeep">#BDBDBD</color>
 
 
 
