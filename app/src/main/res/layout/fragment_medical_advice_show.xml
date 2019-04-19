@@ -43,8 +43,6 @@
                             android:layout_height="wrap_content"
                             android:text="Reminder"
                             android:textSize="@dimen/_13ssp"/>
-
-
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
@@ -128,7 +126,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
                                     android:text="On Klinik"/>
-
                             </RelativeLayout>
 
                             <FrameLayout
@@ -137,7 +134,31 @@
                                 android:layout_height="wrap_content"/>
 
                         </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Produk"
+                                    android:layout_alignParentStart="true"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:text="Home Care"/>
+                            </RelativeLayout>
 
+                            <FrameLayout
+                                android:id="@+id/container_produk_medical_advice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
