@@ -60,6 +60,20 @@ public class DatabaseHelper extends SQLiteOpenHelper
         onCreate(db);
     }
 
+    public void deleteAllRow(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS user");
+        db.execSQL("DROP TABLE IF EXISTS produk");
+        db.execSQL("DROP TABLE IF EXISTS bill");
+        db.execSQL("DROP TABLE IF EXISTS treatment");
+        db.execSQL("DROP TABLE IF EXISTS event");
+        db.execSQL("DROP TABLE IF EXISTS voucher");
+        db.execSQL("DROP TABLE IF EXISTS medical");
+        db.execSQL("DROP TABLE IF EXISTS konsul");
+        // create new tables
+        onCreate(db);
+    }
+
 //==========KONSUL==========
     public boolean insertKonsul(Konsul konsul){
         //check data user ada atau tidak
