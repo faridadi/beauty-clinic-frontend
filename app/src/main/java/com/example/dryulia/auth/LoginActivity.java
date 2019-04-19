@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.button_login);
         regis = (TextView) findViewById(R.id.text_register);
         url = "http://192.168.100.98/klinik_kecantikan/core/request/auth_cust?appkey=2nqcKDagPLlTk9ibHOQUIG0l5bSKsloZ6JSjrshFcV8xYLGRixtuEKVGlIBGv04LRpnQrOcxvYg";
-        //url = "http://192.168.100.98/klinik_kecantikan/core/request/auth_cust";
         apikey = "2nqcKDagPLlTk9ibHOQUIG0l5bSKsloZ6JSjrshFcV8xYLGRixtuEKVGlIBGv04LRpnQrOcxvYg";
         nameKey = "appkey";
 
