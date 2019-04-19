@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.dryulia.R;
 import com.example.dryulia.mainscreen.MainScreenActivity;
+import com.example.dryulia.mainscreen.home.bill.BillFragment;
 import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
 import com.example.dryulia.mainscreen.home.produk.ProdukFragment;
 import com.example.dryulia.mainscreen.home.rekammedis.RekamMedisFragment;
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment {
     private Fragment produkFragment;
     private Fragment medicalAdviceFragment;
     private Fragment rekamMedisFragment;
+    private Fragment billFragment;
 
 
     public HomeFragment() {
@@ -59,6 +61,7 @@ public class HomeFragment extends Fragment {
         cvBill = view.findViewById(R.id.cv_bill);
         cvRekamMedis = view.findViewById(R.id.cv_rekamMedis);
 
+
         ImageListener imageListener = new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
@@ -71,6 +74,7 @@ public class HomeFragment extends Fragment {
         produkFragment = new ProdukFragment();
         medicalAdviceFragment = new MedicalAdviceFragment();
         rekamMedisFragment = new RekamMedisFragment();
+        billFragment = new BillFragment();
 
 
 
@@ -115,6 +119,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Anda Memilih Bill", Toast.LENGTH_SHORT).show();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, billFragment).commit();
             }
         });
 

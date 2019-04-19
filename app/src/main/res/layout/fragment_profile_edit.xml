@@ -91,9 +91,8 @@
                             android:gravity="center"
                             android:background="@null"
                             android:backgroundTint="@color/colorProfileCardView"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp"
-                            />
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_6sdp"/>
                     </android.support.v7.widget.CardView>
                 </LinearLayout>
                 <LinearLayout
@@ -123,9 +122,8 @@
                             android:gravity="center"
                             android:background="@null"
                             android:backgroundTint="@color/colorProfileCardView"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp"
-                            />
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_6sdp"/>
                     </android.support.v7.widget.CardView>
                 </LinearLayout>
                 <LinearLayout
@@ -155,9 +153,8 @@
                             android:gravity="center"
                             android:background="@null"
                             android:backgroundTint="@color/colorProfileCardView"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp"
-                            />
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_6sdp"/>
                     </android.support.v7.widget.CardView>
                 </LinearLayout>
                 <LinearLayout
@@ -187,9 +184,8 @@
                             android:gravity="center"
                             android:background="@null"
                             android:backgroundTint="@color/colorProfileCardView"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp"
-                            />
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_6sdp"/>
                     </android.support.v7.widget.CardView>
                 </LinearLayout>
                 <LinearLayout
@@ -219,9 +215,8 @@
                             android:gravity="center"
                             android:background="@null"
                             android:backgroundTint="@color/colorProfileCardView"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp"
-                            />
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_6sdp"/>
                     </android.support.v7.widget.CardView>
                 </LinearLayout>
                 <LinearLayout
@@ -251,9 +246,8 @@
                             android:gravity="center"
                             android:background="@null"
                             android:backgroundTint="@color/colorProfileCardView"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp"
-                            />
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_6sdp"/>
                     </android.support.v7.widget.CardView>
                 </LinearLayout>
 
