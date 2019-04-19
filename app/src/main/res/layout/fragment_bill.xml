@@ -79,65 +79,108 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:layout_marginBottom="@dimen/_3sdp"
-                        android:layout_alignParentBottom="true">
-                        <ImageView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_coupon"/>
-                        <TextView
-                            android:layout_width="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Vouceher"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/_10sdp"
                             android:layout_marginLeft="@dimen/_5sdp"
-                            android:textColor="@color/colorWhite"/>
-                        <android.support.v7.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:cardCornerRadius="@dimen/_10sdp"
-                            app:cardElevation="@dimen/_20sdp"
-                            android:backgroundTint="@color/colorWhite"
-                            android:layout_marginLeft="@dimen/_5sdp"
-
-                            >
-                        <android.support.v7.widget.CardView
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_height="match_parent"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="@dimen/_20sdp"
-                            android:layout_margin="@dimen/_2sdp"
-                            android:backgroundTint="@color/colorBackground"
-                            >
-                            <EditText
+                            android:layout_marginRight="@dimen/_5sdp">
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:hint="Masukan Kode"
-                                android:textSize="@dimen/_12ssp"
-                                android:layout_gravity="center"
-                                android:paddingLeft="@dimen/_1sdp"
-                                android:paddingRight="@dimen/_1sdp"
-                                android:textColorHint="@color/colorWhite"
-                                android:textColor="@color/colorWhite"/>
+                                android:text="Total Amount"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="@dimen/_20ssp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="right">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/_20ssp"
+                                    android:text="Rp. "
+                                    android:textColor="@color/colorWhite"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="600.000"
+                                    android:textSize="@dimen/_20ssp"
+                                    android:textColor="@color/colorWhite"/>
 
-                        </android.support.v7.widget.CardView>
-                        </android.support.v7.widget.CardView>
+                            </LinearLayout>
 
-                        <Button
-                            android:layout_width="wrap_content"
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="PAY"
-                            android:layout_weight="1"
-                            android:background="@drawable/button_cancel"/>
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_3sdp"
+                           >
 
+                            <ImageView
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_height="55dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_coupon" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Vouceher"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:textColor="@color/colorWhite"/>
+                            <android.support.v7.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="@dimen/_10sdp"
+                                app:cardElevation="@dimen/_20sdp"
+                                android:backgroundTint="@color/colorWhite"
+                                android:layout_marginLeft="@dimen/_5sdp"
+
+                                >
+                                <android.support.v7.widget.CardView
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="8dp"
+                                    app:cardElevation="@dimen/_20sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    android:backgroundTint="@color/colorBackground"
+                                    >
+                                    <EditText
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Masukan Kode"
+                                        android:textSize="@dimen/_12ssp"
+                                        android:layout_gravity="center"
+                                        android:paddingLeft="@dimen/_1sdp"
+                                        android:paddingRight="@dimen/_1sdp"
+                                        android:textColorHint="@color/colorWhite"
+                                        android:textColor="@color/colorWhite"/>
+
+                                </android.support.v7.widget.CardView>
+                            </android.support.v7.widget.CardView>
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PAY"
+                                android:layout_weight="1"
+                                android:background="@drawable/button_cancel"/>
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
+
                 </RelativeLayout>
 
 
