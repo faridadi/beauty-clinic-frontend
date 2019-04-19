@@ -19,7 +19,7 @@ import java.util.Calendar;
 
 public class KonsultasiFragment extends Fragment {
     //Pilih Layanan Fragment
-    private String sKeluhan, sAreaKeluhan, sLamaKeluhan, sRiwayatCream, sRiwayatPerawatan, sTanggalKonsultasi, depan, kiri, kanan;
+    private String sKeluhan, sAreaKeluhan, sLamaKeluhan, sRiwayatCream, sRiwayatPerawatan, sTanggalKonsultasi, depan, kiri, kanan, barcode;
     private Calendar sCalendar;
 
     public Calendar getsCalendar() {
@@ -174,6 +174,14 @@ public class KonsultasiFragment extends Fragment {
 
     public String getsKanan() {
         return kanan;
+    }
+
+    public String getsBarcode() {
+        return barcode;
+    }
+
+    public void setsBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
 

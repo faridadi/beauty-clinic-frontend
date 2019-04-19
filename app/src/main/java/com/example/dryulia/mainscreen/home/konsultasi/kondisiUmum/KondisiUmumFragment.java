@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -41,6 +42,7 @@ public class KondisiUmumFragment extends Fragment {
     ImageView depanImage;//1
     ImageView kiriImage; //2
     ImageView kananImage;//3
+    TextView wajah;
     int tmp2 = 0;
 
     int tmp = 0;
@@ -70,6 +72,7 @@ public class KondisiUmumFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        wajah = view.findViewById(R.id.wajah_posisi);
         btnSimpan = view.findViewById(R.id.btn_simpan_kondisiUmum);
         depan = view.findViewById(R.id.bagian_depan);
         kiri = view.findViewById(R.id.bagian_kiri);
@@ -82,25 +85,22 @@ public class KondisiUmumFragment extends Fragment {
         Bitmap bit;
 
         if (KonsultasiFragment.getInstance().getsKiri() != null){
-            Glide.with(getActivity())
-                    .load(KonsultasiFragment.getInstance().getsKiri()).into(kiriImage);
-            Glide.with(getActivity())
-                    .load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
+            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKiri()).into(kiriImage);
+            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
             reTake.setVisibility(View.VISIBLE);
+            wajah.setText("Kiri");
 
         }if (KonsultasiFragment.getInstance().getsKanan() != null){
-            Glide.with(getActivity())
-                    .load(KonsultasiFragment.getInstance().getsKanan()).into(kananImage);
-            Glide.with(getActivity())
-                    .load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
+            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKanan()).into(kananImage);
+            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
             reTake.setVisibility(View.VISIBLE);
+            wajah.setText("Kanan");
         }
         if (KonsultasiFragment.getInstance().getsDepan() != null) {
-            Glide.with(getActivity())
-                    .load(KonsultasiFragment.getInstance().getsDepan()).into(depanImage);
-            Glide.with(getActivity())
-                    .load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
+            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsDepan()).into(depanImage);
+            Glide.with(getActivity()).load(KonsultasiFragment.getInstance().getsKiri()).into(motherImage);
             reTake.setVisibility(View.VISIBLE);
+            wajah.setText("Depan");
         }
 
         reTake.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +114,7 @@ public class KondisiUmumFragment extends Fragment {
                 }
             }
         });
+
         depan.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -160,8 +161,6 @@ public class KondisiUmumFragment extends Fragment {
                 }
             }
         });
-
-
 
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,31 +243,30 @@ public class KondisiUmumFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 Uri selectedImage = imageUri;
                 try {
-                    Bitmap bitmap;
-                    bitmap = BitmapFactory.decodeFile(selectedImage.getEncodedPath());
                     //1 depan, 2 kiri, 3 kanan
                     switch (tmp){
                         case 1://depan
                             KonsultasiFragment.getInstance().setsDepan(selectedImage.getEncodedPath().toString());
-                            motherImage.setImageBitmap(bitmap);
-                            depanImage.setImageBitmap(bitmap);
+                            wajah.setText("Depan");
+                            Glide.with(getActivity()).load(imageUri).into(depanImage);
+                            Glide.with(getActivity()).load(imageUri).into(motherImage);
                             reTake.setVisibility(View.VISIBLE);
-                            Toast.makeText(getActivity(), "foto depan", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Foto Depan", Toast.LENGTH_SHORT).show();
                             break;
                         case 2 : //kiri
                             KonsultasiFragment.getInstance().setsKiri(selectedImage.getEncodedPath().toString());
-                            motherImage.setImageBitmap(bitmap);
-                            kiriImage.setImageBitmap(bitmap);
+                            Glide.with(getActivity()).load(imageUri).into(kiriImage);
+                            Glide.with(getActivity()).load(imageUri).into(motherImage);
                             reTake.setVisibility(View.VISIBLE);
-                            Toast.makeText(getContext(), "foto kiri", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Foto Kiri", Toast.LENGTH_SHORT).show();
                             break;
                         case 3 ://kanan
                             KonsultasiFragment.getInstance().setsKanan(selectedImage.getEncodedPath().toString());
-                            motherImage.setImageBitmap(bitmap);
-                            kananImage.setImageBitmap(bitmap);
+                            Glide.with(getActivity()).load(imageUri).into(kananImage);
+                            Glide.with(getActivity()).load(imageUri).into(motherImage);
                             reTake.setVisibility(View.VISIBLE);
                             Log.d("coba ", KonsultasiFragment.getInstance().getsKanan());
-                            Toast.makeText(getActivity(), "foto kanan", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Doto Kanan", Toast.LENGTH_SHORT).show();
                             break;
                         default :
                              Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
