@@ -59,6 +59,7 @@ public class PilihLayananFragment extends Fragment {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 KonsultasiFragment.getInstance().getsKonsul().setKeluhan(edtKeluhan.getText().toString());
                 KonsultasiFragment.getInstance().getsKonsul().setArea(edtAreaKeluhan.getText().toString());
                 KonsultasiFragment.getInstance().getsKonsul().setLama(edtLamaKeluhan.getText().toString());

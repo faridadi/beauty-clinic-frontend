@@ -26,6 +26,7 @@ import android.support.v4.app.Fragment;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.bumptech.glide.Glide;
 import com.example.dryulia.R;
 import com.example.dryulia.database.DatabaseHelper;
 import com.example.dryulia.model.Konsul;
@@ -49,7 +50,6 @@ public class BookingFragment extends Fragment {
     Dialog myDialog;
     CardView a, kondisiUmum;
     DatabaseHelper db;
-    Konsul konsul;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,16 +73,18 @@ public class BookingFragment extends Fragment {
         barcodeText = view.findViewById(R.id.booking_code);
         btnNext = view.findViewById(R.id.btn_booking_next);
         btnCancel = view.findViewById(R.id.btn_booking_cancel);
-
         //memilih data untuk dimasukkan di modal dialog
-        if (!db.cekKonsul()){
-            konsul = db.getKonsul();
-        }else{
-            konsul = KonsultasiFragment.getInstance().getsKonsul();
-        }
 
         imgAnamnesa = view.findViewById(R.id.booking_anamnesa);
         kondisiUmum = view.findViewById(R.id.cv_booking_kondisi_umum);
+
+        barcodeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.deleteAllKonsul();
+                Toast.makeText(getActivity(), "Konsul database clear", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //Show dialog untuk kondisi
         kondisiUmum.setOnClickListener(new View.OnClickListener() {
@@ -101,8 +103,6 @@ public class BookingFragment extends Fragment {
             }
         });
 
-
-
         //cek data konsul di database jika tidak ada koneksi atau offline
         if (db.cekKonsul()){
             Konsul ko = db.getKonsul();
@@ -111,6 +111,7 @@ public class BookingFragment extends Fragment {
             barcodeText.setText(ko.getBarcode());
             barcodeText.setVisibility(View.VISIBLE);
             btnCancel.setVisibility(View.INVISIBLE);
+            btnNext.setVisibility(View.INVISIBLE);
         }
 
         //Tombol save akhir
@@ -159,6 +160,7 @@ public class BookingFragment extends Fragment {
                                 barcodeText.setText(text);
                                 barcodeText.setVisibility(View.VISIBLE);
                                 btnCancel.setVisibility(View.INVISIBLE);
+                                btnNext.setVisibility(View.INVISIBLE);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -176,8 +178,7 @@ public class BookingFragment extends Fragment {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.deleteAllKonsul();
-                KonsultasiFragment.getInstance().setStep(1);
+                KonsultasiFragment.getInstance().setStep(0);
             }
         });
 
@@ -196,7 +197,18 @@ public class BookingFragment extends Fragment {
         }
     }
 
+    private Konsul checkDataShow(){
+        Konsul konsul;
+        if (db.cekKonsul()){
+            konsul = db.getKonsul();
+        }else{
+            konsul = KonsultasiFragment.getInstance().getsKonsul();
+        }
+        return konsul;
+    }
+
     private void showAnamnesaDialog() {
+        Konsul konsul =checkDataShow();
         final Dialog dialog = new Dialog(getActivity());
         dialog.setCancelable(true);
         View view  = getActivity().getLayoutInflater().inflate(R.layout.popup_anamnesa, null);
@@ -221,11 +233,18 @@ public class BookingFragment extends Fragment {
         dialog.show();
     }
     private void showKondisiUmumDialog() {
+        Konsul konsul =checkDataShow();
         final Dialog dialog = new Dialog(getActivity());
         dialog.setCancelable(true);
         View view  = getActivity().getLayoutInflater().inflate(R.layout.popup_kondisi_umum, null);
         dialog.setContentView(view);
         final ImageView exit = view.findViewById(R.id.img_popup_kondisiumum_exit);
+        final ImageView depan = view.findViewById(R.id.img__popup_kondisi_umum_wajah_depan);
+        final ImageView kiri = view.findViewById(R.id.img__popup_kondisi_umum_wajah_kiri);
+        final ImageView kanan = view.findViewById(R.id.img__popup_kondisi_umum_wajah_kanan);
+        Glide.with(getActivity()).load(konsul.getDepan()).into(depan);
+        Glide.with(getActivity()).load(konsul.getKiri()).into(kiri);
+        Glide.with(getActivity()).load(konsul.getKanan()).into(kanan);
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override

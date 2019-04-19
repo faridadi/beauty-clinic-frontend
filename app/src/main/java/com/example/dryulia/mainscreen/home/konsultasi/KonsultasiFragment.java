@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dryulia.R;
+import com.example.dryulia.database.DatabaseHelper;
 import com.example.dryulia.mainscreen.home.konsultasi.kondisiUmum.KondisiUmumFragment;
 import com.example.dryulia.model.Konsul;
 import com.shuhart.stepview.StepView;
@@ -53,6 +54,7 @@ public class KonsultasiFragment extends Fragment {
     private Fragment kondisiUmumFragment;
     private Fragment bookingFragment;
     private Fragment antrianFragment;
+    private DatabaseHelper db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,8 +80,14 @@ public class KonsultasiFragment extends Fragment {
         stepView = view.findViewById(R.id.step_view);
         stepView.setSteps(stepList);
         //Fragment pilihlayananFragment = new PilihLayananFragment();
+        db = new DatabaseHelper(getContext());
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_konsultasi, pilihlayananFragment).commit();
+        //cek apakah sudah konsult apa belum
+        if (db.cekKonsul()){
+            setStep(2);
+        }else {
+            transaction.replace(R.id.content_konsultasi, pilihlayananFragment).commit();
+        }
         stepView.setOnStepClickListener(new StepView.OnStepClickListener() {
             @Override
             public void onStepClick(int step) {
