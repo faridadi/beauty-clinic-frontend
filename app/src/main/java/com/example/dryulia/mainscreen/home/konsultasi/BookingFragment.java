@@ -1,5 +1,6 @@
 package com.example.dryulia.mainscreen.home.konsultasi;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
 import com.example.dryulia.R;
 import com.example.dryulia.database.DatabaseHelper;
+import com.example.dryulia.helper.ConnectivityHelper;
 import com.example.dryulia.model.Konsul;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -109,13 +111,17 @@ public class BookingFragment extends Fragment {
             btnNext.setVisibility(View.INVISIBLE);
         }
 
-        //Tombol save akhir
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //cek koneksi
+                if (!ConnectivityHelper.isConnectedToNetwork(getActivity())){
+                    Toast.makeText(getActivity(), "Anda belum terhubung dengan internet", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 AlertDialog.Builder alertdialog = new AlertDialog.Builder(getContext());
-                alertdialog.setMessage("Apabila anda klik booking now maka akan muncul barcode untuk di scan di CS." +
+                alertdialog.setMessage("Apabila anda klik ya maka akan muncul barcode untuk di scan di CS. " +
                         "Booking antrian sekarang? ");
                 alertdialog.setTitle("Konfirmasi Booking Antrian");
                 alertdialog.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
@@ -135,6 +141,7 @@ public class BookingFragment extends Fragment {
                                     .build().getAsJSONObject(new JSONObjectRequestListener() {
                                 @Override
                                 public void onResponse(JSONObject response) {//mendapat data dari server berupa barcode yang akan disimpan dalam database
+                                    //seleksi kondisi response json dari server
                                     Log.d("json", response.toString());
                                     String text=response.toString(); // Whatever you need to encode in the QR code
                                     //get data barcode from server, save to local database, save new data konsul to database
@@ -183,12 +190,8 @@ public class BookingFragment extends Fragment {
                         dialog.dismiss();
                     }
                 });
-
                 AlertDialog alertDialog2  = alertdialog.create();
                 alertDialog2.show();
-
-
-
 
             }
         });

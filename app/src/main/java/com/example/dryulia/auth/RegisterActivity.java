@@ -49,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainScreenActivity.class));
+                finish();
                 return false;
             }
         });

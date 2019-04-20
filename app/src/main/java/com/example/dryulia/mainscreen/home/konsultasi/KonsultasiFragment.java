@@ -100,11 +100,11 @@ public class KonsultasiFragment extends Fragment {
         Log.d("step", step  + "");
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         if (step == 0){
-            transaction.replace(R.id.content_konsultasi, pilihlayananFragment).commit();
+            transaction.replace(R.id.content_konsultasi, pilihlayananFragment,"layanan").addToBackStack("layanan").commit();
         }else if(step == 1){
-            transaction.replace(R.id.content_konsultasi, kondisiUmumFragment).commit();
+            transaction.replace(R.id.content_konsultasi, kondisiUmumFragment, "kondisi").addToBackStack("kondisi").commit();
         }else if(step == 2){
-            transaction.replace(R.id.content_konsultasi, bookingFragment).commit();
+            transaction.replace(R.id.content_konsultasi, bookingFragment, "booking").commit();
         }else if(step == 3){
             transaction.replace(R.id.content_konsultasi, antrianFragment).commit();
         }

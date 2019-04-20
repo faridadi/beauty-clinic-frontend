@@ -23,11 +23,13 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait">
 
         <activity
-            android:name=".auth.LoginActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,9 +38,14 @@
         </activity>
         <activity
             android:name=".auth.RegisterActivity"
-            android:theme="@style/AppThemeRegister"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".mainscreen.MainScreenActivity"></activity>
+            android:theme="@style/AppThemeRegister"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".auth.LoginActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".mainscreen.MainScreenActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

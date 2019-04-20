@@ -140,8 +140,6 @@ public class HomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
-
         }
 
     @Override
@@ -153,5 +151,6 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
+
 }
 

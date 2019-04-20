@@ -54,9 +54,9 @@ public class ProfileShowFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
-
 
         imgEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +64,7 @@ public class ProfileShowFragment extends Fragment {
                 Fragment profileEditFragment = new ProfileEditFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.profile_container, profileEditFragment).commit();
-
             }
         });
-
     }
-
 }
