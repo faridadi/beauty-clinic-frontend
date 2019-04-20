@@ -2,17 +2,17 @@ package com.example.dryulia.mainscreen.home.konsultasi.kondisiUmum;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -31,7 +31,15 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.dryulia.R;
 import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
 import java.io.File;
+import java.util.List;
 
 public class KondisiUmumFragment extends Fragment {
 
@@ -109,10 +117,12 @@ public class KondisiUmumFragment extends Fragment {
                 wajah.setText("Depan");
             }
         }
+
         reTake.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
+                hasPermission();
                 if (checkPermission()) {
                     takePicture(tmp2);
                 }else {
@@ -126,6 +136,7 @@ public class KondisiUmumFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tmp2 = 1;
+                hasPermission();
                 if (depanImage.getDrawable() == null){
                     if (checkPermission()) {
                         takePicture(1);
@@ -142,6 +153,7 @@ public class KondisiUmumFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tmp2 = 2;
+                hasPermission();
                 if (kiriImage.getDrawable() == null){
                     if (checkPermission()) {
                         takePicture(2);
@@ -158,6 +170,7 @@ public class KondisiUmumFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tmp2 = 3;
+                hasPermission();
                 if (kananImage.getDrawable() == null){
                     if (checkPermission()) {
                         takePicture(3);
@@ -176,6 +189,7 @@ public class KondisiUmumFragment extends Fragment {
         });
     }
 
+    //fungsi mengambil foto
     private void takePicture(int image){
         //1 depan, 2 kiri. 3 kanan
         tmp = image;
@@ -191,6 +205,61 @@ public class KondisiUmumFragment extends Fragment {
         startActivityForResult(intent, CAMERA_REQUEST);
     }
 
+    //fungsi cek permission
+    public void hasPermission() {
+        final boolean cek = false;
+        Dexter.withActivity(getActivity())
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                ).withListener(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+                if (report.areAllPermissionsGranted()) {
+                    Toast.makeText(getActivity(), "All permissions are granted!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (report.isAnyPermissionPermanentlyDenied()) {
+                    openSettingsDialog();// show alert dialog box
+                }
+            }
+            @Override
+            public void onPermissionRationaleShouldBeShown(List permissions, PermissionToken token) {
+                token.continuePermissionRequest();
+            }
+            }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getContext(), "Error!! ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+    //fungsi untuk popup permission
+    public void openSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Permissions Required");
+        builder.setMessage("Permission is required for using this app. Please enable them in app settings.");
+        builder.setPositiveButton("Go to SETTINGS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                showsettings();
+            }
+        });
+    }
+
+    //fungsi untuk mengatur permission di setting
+    public void showsettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean checkPermission(){
@@ -207,16 +276,6 @@ public class KondisiUmumFragment extends Fragment {
             return false;
         }
         return true;
-    }
-
-    //check the device has camera
-    private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            //the device has camera
-            return true;
-        } else {
-            return false;
-        }
     }
 
     @Override
@@ -243,6 +302,7 @@ public class KondisiUmumFragment extends Fragment {
         }
     }
 
+    //check the device has
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST) {

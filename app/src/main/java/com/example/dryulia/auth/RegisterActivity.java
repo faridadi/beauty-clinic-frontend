@@ -59,11 +59,11 @@ public class RegisterActivity extends AppCompatActivity {
                     AndroidNetworking.post(url)
                             .setPriority(Priority.MEDIUM)
                             .addBodyParameter("name", nama.getText().toString())
-                            .addBodyParameter("uname", nama.getText().toString())
-                            .addBodyParameter("address", nama.getText().toString())
-                            .addBodyParameter("upass", nama.getText().toString())
-                            .addBodyParameter("email", nama.getText().toString())
-                            .addBodyParameter("phone", nama.getText().toString())
+                            .addBodyParameter("uname", uname.getText().toString())
+                            .addBodyParameter("address", "")//uname.getText().toString())
+                            .addBodyParameter("upass", upass.getText().toString())
+                            .addBodyParameter("email", email.getText().toString())
+                            .addBodyParameter("phone", phone.getText().toString())
                             .build()
                             .getAsJSONObject(new JSONObjectRequestListener() {
                                 @Override
@@ -97,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
-                                        Toast.makeText(getApplicationContext(), "Gagal Login silahkan d", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Gagal Login silahkan", Toast.LENGTH_SHORT).show();
                                     }
 
                                 }

@@ -13,11 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.ConnectionClassManager;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.dryulia.R;
 import com.example.dryulia.database.DatabaseHelper;
+import com.example.dryulia.helper.ConnectivityHelper;
 import com.example.dryulia.mainscreen.MainScreenActivity;
 import com.example.dryulia.model.User;
 
@@ -70,63 +72,61 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Password Kosong silahkan isi", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (ConnectivityHelper.isConnectedToNetwork(getApplicationContext())) {
+                    AndroidNetworking.post(url)
+                            .setPriority(Priority.MEDIUM)
+                            .addBodyParameter("uname", username)
+                            .addBodyParameter("upass", password)
+                            .addPathParameter("appkey", apikey)
+                            .build()
+                            .getAsJSONObject(new JSONObjectRequestListener() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    //Handle Response
+                                    Log.d("TAG", "onResponse: " + response); //untuk log pada onresponse
+                                    try {
+                                        String res = response.getString("response");
+                                        JSONObject data = response.getJSONObject("data");
+                                        String id  = data.getString("id");
+                                        String name = data.getString("name");
+                                        String phone = data.getString("phone");
+                                        String email = data.getString("email");
+                                        String address = data.getString("address");
+                                        String uname = data.getString("uname");
+                                        String token_acc = data.getString("token_acc");
+                                        String token_gcm = data.getString("token_gcm");
+                                        User user = new User(id,name,phone,email,address,uname,token_acc,token_gcm);
+                                        if (res.toString().equals("success")){
+                                            if (db.cekUser()){
 
-                AndroidNetworking.post(url)
-                        .setPriority(Priority.MEDIUM)
-                        .addBodyParameter("uname", username)
-                        .addBodyParameter("upass", password)
-                        .addPathParameter("appkey", apikey)
-                        .build()
-                        .getAsJSONObject(new JSONObjectRequestListener() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                //Handle Response
-                                Log.d("TAG", "onResponse: " + response); //untuk log pada onresponse
-                                try {
-                                    String res = response.getString("response");
-                                    JSONObject data = response.getJSONObject("data");
-                                    String id  = data.getString("id");
-                                    String name = data.getString("name");
-                                    String phone = data.getString("phone");
-                                    String email = data.getString("email");
-                                    String address = data.getString("address");
-                                    String uname = data.getString("uname");
-                                    String token_acc = data.getString("token_acc");
-                                    String token_gcm = data.getString("token_gcm");
-                                    User user = new User(id,name,phone,email,address,uname,token_acc,token_gcm);
-                                    if (res.toString().equals("success")){
-                                        if (db.cekUser()){
+                                            }else {
+                                                db.insertUser(user);
+                                            }
+                                            Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            startActivity(intent);
+                                            finish();
 
-                                        }else {
-                                            db.insertUser(user);
+                                            return;
+                                        }else{
+                                            Toast.makeText(LoginActivity.this, "gagal login", Toast.LENGTH_SHORT).show();
                                         }
-                                        Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(intent);
-                                        finish();
-
-                                        return;
-                                    }else{
-                                        Toast.makeText(LoginActivity.this, "gagal login", Toast.LENGTH_SHORT).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        Toast.makeText(LoginActivity.this, "Gagal Login silahkan d", Toast.LENGTH_SHORT).show();
                                     }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                    Toast.makeText(LoginActivity.this, "Gagal Login silahkan d", Toast.LENGTH_SHORT).show();
                                 }
-                                //Toast.makeText(getApplicationContext(),"Data berhasil ditambahkan" , Toast.LENGTH_SHORT).show();
-
-
-                                //memunculkan Toast saat data berhasil ditambahkan
-
-                            }
-                            @Override
-                            public void onError(ANError error) {
-                                //Handle Error
-                                Log.d("TAG", "onError: Failed" + error); //untuk log pada onerror
-                                Toast.makeText(getApplicationContext(),"Data gagal ditambahkan", Toast.LENGTH_SHORT).show();
-                                //memunculkan Toast saat data gagal ditambahkan
-                            }
-                        });
+                                @Override
+                                public void onError(ANError error) {
+                                    //Handle Error
+                                    Log.d("TAG", "onError: Failed" + error); //untuk log pada onerror
+                                    Toast.makeText(getApplicationContext(),"Data gagal ditambahkan", Toast.LENGTH_SHORT).show();
+                                    //memunculkan Toast saat data gagal ditambahkan
+                                }
+                            });
+                } else {
+                    Toast.makeText(LoginActivity.this, "Anda Belum Terhubung Internet", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
