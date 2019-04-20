@@ -23,8 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    EditText nama, uname, upass, email, phone;
+    EditText nama, uname, upass, email, phone, address;
     Button regis;
     DatabaseHelper db;
     String url, apikey, nameKey;
@@ -43,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         upass = (EditText) findViewById(R.id.register_password);
         email = (EditText) findViewById(R.id.register_email);
         phone = (EditText) findViewById(R.id.register_Notelepon);
+        address = (EditText) findViewById(R.id.register_address);
         regis = (Button) findViewById(R.id.button_register);
 
         nama.setOnLongClickListener(new View.OnLongClickListener() {
@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                             .setPriority(Priority.MEDIUM)
                             .addBodyParameter("name", nama.getText().toString())
                             .addBodyParameter("uname", uname.getText().toString())
-                            .addBodyParameter("address", "")//uname.getText().toString())
+                            .addBodyParameter("address", address.getText().toString())
                             .addBodyParameter("upass", upass.getText().toString())
                             .addBodyParameter("email", email.getText().toString())
                             .addBodyParameter("phone", phone.getText().toString())
@@ -124,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean chekForm(){
-        if (isEmpty(nama) && isEmpty(uname) && isEmpty(upass) && isEmpty(email) && isEmpty(phone)){
+        if (isEmpty(nama) && isEmpty(uname) && isEmpty(upass) && isEmpty(email) && isEmpty(phone) && isEmpty(address)){
             if (isEmpty(nama)){
                 nama.setError("nama");
             }if (isEmpty(uname)){
@@ -134,6 +134,8 @@ public class RegisterActivity extends AppCompatActivity {
             }if (isEmpty(email)){
                 email.setError("email");
             }if (isEmpty(phone)){
+                phone.setError("phone");
+            }if (isEmpty(address)){
                 phone.setError("phone");
             }
             return false;

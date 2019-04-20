@@ -20,12 +20,14 @@ import com.example.dryulia.R;
 import com.example.dryulia.auth.LoginActivity;
 import com.example.dryulia.database.DatabaseHelper;
 import com.example.dryulia.mainscreen.MainScreenActivity;
+import com.example.dryulia.model.User;
 
 public class ProfileShowFragment extends Fragment {
 
     TextView namaLengkap, username, email, alamat, noTelepon, tanggalLahir ;
     ImageView imgProfile, imgEditProfile;
     CardView logout;
+    DatabaseHelper db;
 
     @Nullable
     @Override
@@ -35,7 +37,8 @@ public class ProfileShowFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+        db = new DatabaseHelper(getActivity());
+        User us = db.getUser();
         namaLengkap = view.findViewById(R.id.tv_profile_nama_lengkap);
         username = view.findViewById(R.id.tv_profile_username);
         email = view.findViewById(R.id.tv_profile_email);
@@ -45,6 +48,11 @@ public class ProfileShowFragment extends Fragment {
         imgProfile = view.findViewById(R.id.ic_edit_profile);
         imgEditProfile = view.findViewById(R.id.ic_edit_profile);
         logout = view.findViewById(R.id.tv_profile_logout);
+        namaLengkap.setText(us.getName());
+        username.setText(us.getUname());
+        email.setText(us.getEmail());
+        alamat.setText(us.getAddress());
+        noTelepon.setText(us.getPhone());
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

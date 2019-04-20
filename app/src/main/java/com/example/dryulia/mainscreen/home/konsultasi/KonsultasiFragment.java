@@ -22,23 +22,14 @@ import java.util.Calendar;
 public class KonsultasiFragment extends Fragment {
     //Pilih Layanan Fragment
     //private String sKeluhan, sAreaKeluhan, sLamaKeluhan, sRiwayatCream, sRiwayatPerawatan, sTanggalKonsultasi, depan, kiri, kanan, barcode;
-    private Calendar sCalendar;
-    private Konsul konsul = new Konsul();
-    public Calendar getsCalendar() {
-        return sCalendar;
-    }
-    public void setsCalendar(Calendar sCalendar) {
-        this.sCalendar = sCalendar;
-    }
 
+    private Konsul konsul = new Konsul();
     public Konsul getsKonsul() {
         return konsul;
     }
-
     public void setsKonsul(Konsul konsul) {
         this.konsul = konsul;
     }
-
     private StepView stepView;
     private ArrayList<String> stepList = new ArrayList<>();
     public StepView getStepView() {
@@ -116,9 +107,7 @@ public class KonsultasiFragment extends Fragment {
         stepList.add("Kondisi Umum");
         stepList.add("Booking");
         stepList.add("Antrean");
-
     }
-
     @Override
     public void onResume() {
         super.onResume();

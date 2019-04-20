@@ -26,12 +26,8 @@ import com.synnapps.carouselview.ImageListener;
 public class HomeFragment extends Fragment {
 
     CarouselView carouselView;
-
     private View view;
-    CardView cvKonsultasi, cvTreatment, cvProduk, cvMedicalAdvice,cvBill, cvRekamMedis;
-    private android.app.Fragment selectedFragment;
-    private static MainScreenActivity mainScreenActivity;
-    public static int selectedMenuId;
+    CardView cvKonsultasi, cvTreatment, cvProduk, cvMedicalAdvice,cvBill, cvRekamMedis;;
     private Fragment konsultasiFragment;
     private Fragment treatmentFragment;
     private Fragment produkFragment;
@@ -39,11 +35,9 @@ public class HomeFragment extends Fragment {
     private Fragment rekamMedisFragment;
     private Fragment billFragment;
 
-
     public HomeFragment() {
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

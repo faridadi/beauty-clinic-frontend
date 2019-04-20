@@ -12,11 +12,10 @@ import android.widget.Toast;
 import com.example.dryulia.R;
 import com.example.dryulia.mainscreen.event.EventFragment;
 import com.example.dryulia.mainscreen.home.HomeFragment;
-import com.example.dryulia.mainscreen.home.konsultasi.KonsultasiFragment;
 import com.example.dryulia.mainscreen.message.MessageFragment;
 import com.example.dryulia.mainscreen.profile.ProfileFragment;
 
-public class MainScreenActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainScreenActivity extends AppCompatActivity  {
 
     public BottomNavigationView bottomNavigationView;
     private static Fragment selectedFragment;
@@ -42,19 +41,43 @@ public class MainScreenActivity extends AppCompatActivity implements BottomNavig
         message = new MessageFragment();
         selectedMenuId = R.id.menu_home;
         bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                String TAG = "";
+                switch (menuItem.getItemId()){
+                    case R.id.menu_home:
+                        selectedFragment = home;
+                        TAG = "home";
+                        break;
+                    case R.id.menu_account:
+                        selectedFragment = profile;
+                        TAG = "profile";
+                        break;
+                    case R.id.menu_event:
+                        selectedFragment = event;
+                        TAG = "event";
+                        break;
+                    case R.id.menu_message:
+                        selectedFragment = message;
+                        TAG = "message";
+                        break;
+                }
+                selectedMenuId = menuItem.getItemId();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.content, selectedFragment,TAG).commit();
+                return true;
+            }
+        });
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.content, home,"home").commit();
     }
 
     @Override
     public void onBackPressed() {
-        if(getFragmentManager().getBackStackEntryCount() > 0){
-            getFragmentManager().popBackStack();
-        }
-        else if(getSupportFragmentManager().findFragmentByTag("home") != null){
+        if(getSupportFragmentManager().findFragmentByTag("home") != null){
             super.onBackPressed();
-            Toast.makeText(mainScreenActivity, "EXIT apps", Toast.LENGTH_SHORT).show();
+            //exit daro aplikasi
         }else if((getSupportFragmentManager().findFragmentByTag("profile") != null)||
                 (getSupportFragmentManager().findFragmentByTag("event") != null)||
                 (getSupportFragmentManager().findFragmentByTag("message") != null)){
@@ -62,33 +85,6 @@ public class MainScreenActivity extends AppCompatActivity implements BottomNavig
         }else{
             bottomNavigationView.setSelectedItemId(R.id.menu_home);
         }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        String TAG = "";
-        switch (menuItem.getItemId()){
-            case R.id.menu_home:
-                selectedFragment = home;
-                TAG = "home";
-                break;
-            case R.id.menu_account:
-                selectedFragment = profile;
-                TAG = "profile";
-                break;
-            case R.id.menu_event:
-                selectedFragment = event;
-                TAG = "event";
-                break;
-            case R.id.menu_message:
-                selectedFragment = message;
-                TAG = "message";
-                break;
-        }
-        selectedMenuId = menuItem.getItemId();
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.content, selectedFragment,TAG).commit();
-        return true;
     }
 
     public static int getId(int i) {
@@ -101,15 +97,10 @@ public class MainScreenActivity extends AppCompatActivity implements BottomNavig
                 : R.id.menu_account;
     }
 
-    public void setPage(int i) {
-        bottomNavigationView.setSelectedItemId(getId(i));
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
     }
-
     @Override
     protected void onResume() {
         super.onResume();
