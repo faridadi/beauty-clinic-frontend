@@ -28,11 +28,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="@color/colorBottomNav"
-                app:itemIconTint="@color/colorBackground"
-                app:itemTextColor="@color/colorBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/content"
                 app:menu="@menu/navigation"
+                app:labelVisibilityMode="labeled"
                 android:foregroundGravity="bottom">
             </android.support.design.widget.BottomNavigationView>
         </LinearLayout>

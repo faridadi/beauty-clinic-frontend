@@ -3,6 +3,7 @@ package com.example.dryulia.mainscreen.home.konsultasi;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -118,59 +119,83 @@ public class BookingFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //cek data di temporary dan database konsultasi
-                if (db.cekKonsul()){
-                    Konsul ko = db.getKonsul();
-                    Bitmap bitmap = generateBarcode(ko.getBarcode(),200,200);
-                    barcodeImage.setImageBitmap(bitmap);
-                    barcodeText.setText(ko.getBarcode());
-                    barcodeText.setVisibility(View.VISIBLE);
-                    btnCancel.setVisibility(View.INVISIBLE);
-                    Log.d("Barcode", "Barcode sudah di add");
-                }else{// user melakukan save data ke server
-                    AndroidNetworking.get("https://api.myjson.com/bins/158wds")
-                            .build().getAsJSONObject(new JSONObjectRequestListener() {
-                        @Override
-                        public void onResponse(JSONObject response) {//mendapat data dari server berupa barcode yang akan disimpan dalam database
-                            Log.d("json", response.toString());
-                            String text=response.toString(); // Whatever you need to encode in the QR code
-                            //get data barcode from server, save to local database, save new data konsul to database
-                            db.deleteAllKonsul();
-                            //data didapat dari getInstance
-                            db.insertKonsul(new Konsul(
-                                    KonsultasiFragment.getInstance().getsKonsul().getKeluhan(),
-                                    KonsultasiFragment.getInstance().getsKonsul().getArea(),
-                                    KonsultasiFragment.getInstance().getsKonsul().getLama(),
-                                    KonsultasiFragment.getInstance().getsKonsul().getRiwayatobat(),
-                                    KonsultasiFragment.getInstance().getsKonsul().getRiwayatPerawatan(),
-                                    KonsultasiFragment.getInstance().getsKonsul().getDate(),
-                                    KonsultasiFragment.getInstance().getsKonsul().getDepan(),
-                                    KonsultasiFragment.getInstance().getsKonsul().getKiri(),
-                                    KonsultasiFragment.getInstance().getsKonsul().getKanan(),
-                                    text));
-                            try {
-                                //generate barcode from text
-                                Bitmap bitmap = generateBarcode(text,200,200);
-                                if (bitmap==null){
-                                    Log.d("Barcode", "Error generate Barcode");
-                                    return;
+
+                AlertDialog.Builder alertdialog = new AlertDialog.Builder(getContext());
+                alertdialog.setMessage("Apabila anda klik booking now maka akan muncul barcode untuk di scan di CS." +
+                        "Booking antrian sekarang? ");
+                alertdialog.setTitle("Konfirmasi Booking Antrian");
+                alertdialog.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //cek data di temporary dan database konsultasi
+                        if (db.cekKonsul()){
+                            Konsul ko = db.getKonsul();
+                            Bitmap bitmap = generateBarcode(ko.getBarcode(),200,200);
+                            barcodeImage.setImageBitmap(bitmap);
+                            barcodeText.setText(ko.getBarcode());
+                            barcodeText.setVisibility(View.VISIBLE);
+                            btnCancel.setVisibility(View.INVISIBLE);
+                            Log.d("Barcode", "Barcode sudah di add");
+                        }else{// user melakukan save data ke server
+                            AndroidNetworking.get("https://api.myjson.com/bins/158wds")
+                                    .build().getAsJSONObject(new JSONObjectRequestListener() {
+                                @Override
+                                public void onResponse(JSONObject response) {//mendapat data dari server berupa barcode yang akan disimpan dalam database
+                                    Log.d("json", response.toString());
+                                    String text=response.toString(); // Whatever you need to encode in the QR code
+                                    //get data barcode from server, save to local database, save new data konsul to database
+                                    db.deleteAllKonsul();
+                                    //data didapat dari getInstance
+                                    db.insertKonsul(new Konsul(
+                                            KonsultasiFragment.getInstance().getsKonsul().getKeluhan(),
+                                            KonsultasiFragment.getInstance().getsKonsul().getArea(),
+                                            KonsultasiFragment.getInstance().getsKonsul().getLama(),
+                                            KonsultasiFragment.getInstance().getsKonsul().getRiwayatobat(),
+                                            KonsultasiFragment.getInstance().getsKonsul().getRiwayatPerawatan(),
+                                            KonsultasiFragment.getInstance().getsKonsul().getDate(),
+                                            KonsultasiFragment.getInstance().getsKonsul().getDepan(),
+                                            KonsultasiFragment.getInstance().getsKonsul().getKiri(),
+                                            KonsultasiFragment.getInstance().getsKonsul().getKanan(),
+                                            text));
+                                    try {
+                                        //generate barcode from text
+                                        Bitmap bitmap = generateBarcode(text,200,200);
+                                        if (bitmap==null){
+                                            Log.d("Barcode", "Error generate Barcode");
+                                            return;
+                                        }
+                                        KonsultasiFragment.getInstance().getsKonsul().setBarcode(text);
+                                        barcodeImage.setImageBitmap(bitmap);
+                                        barcodeText.setText(text);
+                                        barcodeText.setVisibility(View.VISIBLE);
+                                        btnCancel.setVisibility(View.INVISIBLE);
+                                        btnNext.setVisibility(View.INVISIBLE);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                                KonsultasiFragment.getInstance().getsKonsul().setBarcode(text);
-                                barcodeImage.setImageBitmap(bitmap);
-                                barcodeText.setText(text);
-                                barcodeText.setVisibility(View.VISIBLE);
-                                btnCancel.setVisibility(View.INVISIBLE);
-                                btnNext.setVisibility(View.INVISIBLE);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                                @Override
+                                public void onError(ANError anError) {
+                                    Log.d("error", anError.toString());
+                                }
+                            });
                         }
-                        @Override
-                        public void onError(ANError anError) {
-                            Log.d("error", anError.toString());
-                        }
-                    });
-                }
+                    }
+                });
+
+                alertdialog.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog2  = alertdialog.create();
+                alertDialog2.show();
+
+
+
+
             }
         });
 

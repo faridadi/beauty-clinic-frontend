@@ -27,73 +27,70 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="@dimen/_2sdp"
-                    >
-                    <LinearLayout
-                        android:id="@+id/hehe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Booking Code"
-                            android:textSize="@dimen/_12ssp"
-                            android:layout_gravity="center"
-                            android:textColor="@color/colorOrange"/>
-                        <android.support.v7.widget.CardView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorBookingCardView"
-                            app:cardCornerRadius="@dimen/_5sdp"
-                            android:layout_gravity="center"
-                            >
-                            <TextView
-                                android:id="@+id/booking_code"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingRight="@dimen/_20sdp"
-                                android:paddingLeft="@dimen/_20sdp"
-                                android:paddingTop="@dimen/_10sdp"
-                                android:gravity="center"
-                                android:paddingBottom="@dimen/_10sdp"
-                                android:textSize="@dimen/_14ssp"
-                                android:text="Bo_2123213"
-                                android:visibility="invisible"/>
-                        </android.support.v7.widget.CardView>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:paddingLeft="@dimen/_20sdp"
                     android:paddingRight="@dimen/_15sdp"
                     >
                     <ImageView
                         android:id="@+id/img_barcode"
-                        android:layout_width="@dimen/_100sdp"
+                        android:layout_width="@dimen/_120sdp"
                         android:layout_height="@dimen/_120sdp"
                         android:background="@color/colorYellow"
                         android:layout_alignParentStart="true"
+                        android:layout_marginTop="@dimen/_4sdp"
                         android:layout_weight="1"
-
                         />
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:gravity="center"
+                        android:layout_gravity="bottom"
                         android:layout_weight="1"
                         >
+                        <LinearLayout
+                            android:id="@+id/hehe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Booking Code"
+                                android:textSize="@dimen/_12ssp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/colorOrange"/>
+                            <android.support.v7.widget.CardView
+
+                                android:layout_width="@dimen/_100sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:backgroundTint="@color/colorBookingCardView"
+                                app:cardCornerRadius="@dimen/_5sdp"
+                                android:layout_gravity="center"
+                                >
+                                <TextView
+                                    android:id="@+id/booking_code"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingRight="@dimen/_20sdp"
+                                    android:paddingLeft="@dimen/_20sdp"
+                                    android:paddingTop="@dimen/_10sdp"
+                                    android:gravity="center"
+                                    android:paddingBottom="@dimen/_10sdp"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:text="Bo_2123213"
+                                    android:visibility="invisible"/>
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -114,36 +111,6 @@
                                 >
                                 <TextView
                                     android:id="@+id/booking_date"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="21 April 2019"
-                                    android:textSize="@dimen/_10ssp"
-                                    android:paddingLeft="@dimen/_18sdp"
-                                    android:paddingRight="@dimen/_18sdp"
-                                    android:paddingTop="@dimen/_8sdp"
-                                    android:paddingBottom="@dimen/_8sdp"/>
-                            </android.support.v7.widget.CardView>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:layout_marginTop="@dimen/_20sdp">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Valid Until"
-                                android:gravity="center"
-                                android:textSize="@dimen/_12ssp"
-                                android:textColor="@color/colorBookingRed"/>
-                            <android.support.v7.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/colorDateCardView"
-                                app:cardCornerRadius="@dimen/_5sdp">
-                                <TextView
-                                    android:id="@+id/booking_expire_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="21 April 2019"
@@ -262,7 +229,7 @@
                 android:id="@+id/btn_booking_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next"
+                android:text="Booking Now"
                 android:textSize="@dimen/_15ssp"
                 android:layout_weight="1"
                 android:textAlignment="center"
