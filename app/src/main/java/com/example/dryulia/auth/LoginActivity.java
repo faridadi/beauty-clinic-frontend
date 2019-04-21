@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     TextView regis;
     DatabaseHelper db;
-
     String url;
     String apikey;
     String nameKey;
@@ -111,14 +110,14 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
-                                        Toast.makeText(LoginActivity.this, "Gagal Login silahkan d", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Gagal Login", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                                 @Override
                                 public void onError(ANError error) {
                                     //Handle Error
                                     Log.d("TAG", "onError: Failed" + error); //untuk log pada onerror
-                                    Toast.makeText(getApplicationContext(),"Data gagal ditambahkan", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Login gagal silahkan login lagi", Toast.LENGTH_SHORT).show();
                                     //memunculkan Toast saat data gagal ditambahkan
                                 }
                             });

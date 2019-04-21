@@ -38,7 +38,7 @@ public class ProfileShowFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         db = new DatabaseHelper(getActivity());
-        User us = db.getUser();
+
         namaLengkap = view.findViewById(R.id.tv_profile_nama_lengkap);
         username = view.findViewById(R.id.tv_profile_username);
         email = view.findViewById(R.id.tv_profile_email);
@@ -48,11 +48,18 @@ public class ProfileShowFragment extends Fragment {
         imgProfile = view.findViewById(R.id.ic_edit_profile);
         imgEditProfile = view.findViewById(R.id.ic_edit_profile);
         logout = view.findViewById(R.id.tv_profile_logout);
-        namaLengkap.setText(us.getName());
-        username.setText(us.getUname());
-        email.setText(us.getEmail());
-        alamat.setText(us.getAddress());
-        noTelepon.setText(us.getPhone());
+
+        //cek user database
+        if  (db.cekUser()){
+            User us = db.getUser();
+            namaLengkap.setText(us.getName());
+            username.setText(us.getUname());
+            email.setText(us.getEmail());
+            alamat.setText(us.getAddress());
+            noTelepon.setText(us.getPhone());
+        }else{
+
+        }
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

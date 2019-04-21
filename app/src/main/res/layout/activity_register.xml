@@ -9,14 +9,12 @@
     android:background="@color/colorBackground">
 
 
-
-           <ImageView
-               android:layout_width="match_parent"
-               android:layout_height="@dimen/_180sdp"
-               android:src="@drawable/logo_yulia"
-               android:layout_gravity="center"
-               android:layout_marginRight="5dp"
-               />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="171dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/logo_yulia" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -24,6 +22,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+                <TextView
+                    android:id="@+id/button_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Login"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_15ssp"
+                    />
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -34,6 +41,7 @@
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginRight="@dimen/_12sdp"
                     >
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -109,7 +117,6 @@
                         android:layout_margin="@dimen/_2sdp"
                         android:backgroundTint="@color/colorBackground"
                         >
-
                         <EditText
                             android:id="@+id/register_password"
                             android:layout_width="match_parent"
@@ -118,6 +125,7 @@
                             android:textColor="@color/colorWhite"
                             android:textColorHint="@color/colorWhite"
                             android:gravity="center"
+                            android:inputType="textPassword"
                             android:background="@null"
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_10sdp"
@@ -185,6 +193,7 @@
                             android:textColor="@color/colorWhite"
                             android:textColorHint="@color/colorWhite"
                             android:gravity="center"
+                            android:inputType="textEmailAddress"
                             android:background="@null"
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_10sdp"
@@ -215,6 +224,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="No. Telepon"
+                            android:inputType="number"
                             android:textColor="@color/colorWhite"
                             android:textColorHint="@color/colorWhite"
                             android:gravity="center"
@@ -234,6 +244,7 @@
                     android:text="Register"
                     android:textSize="@dimen/_25ssp"
                     android:background="@drawable/button_register"/>
+
 
             </LinearLayout>
 

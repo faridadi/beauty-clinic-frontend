@@ -184,7 +184,11 @@ public class KondisiUmumFragment extends Fragment {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                KonsultasiFragment.getInstance().setStep(2);
+                if(depanImage.getDrawable() != null && kiriImage.getDrawable() != null && kananImage.getDrawable() != null){
+                    KonsultasiFragment.getInstance().setStep(2);
+                }else {
+                    Toast.makeText(getActivity(), "Anda belum foto", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -217,11 +221,10 @@ public class KondisiUmumFragment extends Fragment {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
                 if (report.areAllPermissionsGranted()) {
-                    Toast.makeText(getActivity(), "All permissions are granted!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (report.isAnyPermissionPermanentlyDenied()) {
-                    openSettingsDialog();// show alert dialog box
+                    openSettingsDialog();
                 }
             }
             @Override
@@ -312,7 +315,6 @@ public class KondisiUmumFragment extends Fragment {
                     //1 depan, 2 kiri, 3 kanan
                     switch (tmp){
                         case 1://depan
-                            Toast.makeText(getActivity(), ""+selectedImage.getEncodedPath().toString(), Toast.LENGTH_SHORT).show();
                             KonsultasiFragment.getInstance().getsKonsul().setDepan(selectedImage.getEncodedPath().toString());
                             wajah.setText("Depan");
                             Glide.with(getActivity()).load(imageUri).into(depanImage);
@@ -344,7 +346,7 @@ public class KondisiUmumFragment extends Fragment {
                 }
             }
             else {
-                Log.d("foto", "gagal boss");
+                Log.d("foto", "gFF");
             }
         }
     }

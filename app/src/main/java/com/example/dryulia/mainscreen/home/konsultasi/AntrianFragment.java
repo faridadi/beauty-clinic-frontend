@@ -10,13 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.dryulia.R;
-
+import com.example.dryulia.database.DatabaseHelper;
+import com.example.dryulia.model.Antri;
 
 
 public class AntrianFragment extends Fragment {
     CardView anamnesa, kondisiUmum;
+    TextView status, antrian;
+    DatabaseHelper db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,32 +42,36 @@ public class AntrianFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         anamnesa = view.findViewById(R.id.cv_antrian_anamnesa);
         kondisiUmum = view.findViewById(R.id.cv_antrian_kondisi_umum);
+        antrian = view.findViewById(R.id.antrian_digit);
+        status = view.findViewById(R.id.booking_status_code);
+        db = new DatabaseHelper(getActivity());
+        if (db.cekAntri()){
+            Antri antri =  db.getAntri();
+            status.setText(antri.getStatus());
+            antrian.setText(antri.getQuee_text());
+            anamnesa.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialogAnamnes();
+                }
+            });
+            kondisiUmum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialogAKondisiUmum();
+                }
+            });
+        }else{
 
-        anamnesa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogAnamnes();
-            }
-        });
-
-        kondisiUmum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogAKondisiUmum();
-            }
-        });
-
+        }
     }
 
     private void showDialogAnamnes() {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setCancelable(true);
-
         View view  = getActivity().getLayoutInflater().inflate(R.layout.popup_anamnesa, null);
         dialog.setContentView(view);
-
         final ImageView exit = view.findViewById(R.id.img_popup_anamnesa_exit);
-
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

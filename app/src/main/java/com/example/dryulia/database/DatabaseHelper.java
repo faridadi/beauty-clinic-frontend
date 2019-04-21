@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.dryulia.model.Antri;
 import com.example.dryulia.model.Bill;
 import com.example.dryulia.model.Konsul;
 import com.example.dryulia.model.Medical;
@@ -42,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         //Type 1 = produk, 2 = Treatment, konsul, 3 = voucher
         db.execSQL("Create table medical(id INTEGER PRIMARY KEY, nama TEXT, harga INT, jumlah INT, kode TEXT, type INT)");
         db.execSQL("Create table konsul(id INTEGER PRIMARY KEY, keluhan TEXT, area INTEGER, lama TEXT, riwayatobat TEXT, riwayatperawatan TEXT, date TEXT, depan TEXT, kiri TEXT, kanan TEXT, barcode TEXT)");
-
+        db.execSQL("Create table antri(id INTEGER PRIMARY KEY, quee_text TEXT, queue_date TEXT, status TEXT)");
     }
 
     @Override
@@ -56,6 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS voucher");
         db.execSQL("DROP TABLE IF EXISTS medical");
         db.execSQL("DROP TABLE IF EXISTS konsul");
+        db.execSQL("DROP TABLE IF EXISTS antri");
         // create new tables
         onCreate(db);
     }
@@ -70,9 +72,78 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS voucher");
         db.execSQL("DROP TABLE IF EXISTS medical");
         db.execSQL("DROP TABLE IF EXISTS konsul");
+        db.execSQL("DROP TABLE IF EXISTS antri");
         // create new tables
         onCreate(db);
     }
+
+    public boolean insertAntri(Antri antri){
+        //check data user ada atau tidak
+        if (!cekAntri()){
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("quee_text", antri.getQuee_text());
+            values.put("queue_date", antri.getQueue_date());
+            values.put("status", antri.getStatus());
+            // insert row
+            long ins = db.insert("antri", null, values);
+            // assigning tags to todo
+            if (ins == -1 ){
+                return false;
+            }else {
+                return true;
+            }
+        }else {
+            return false;
+        }
+    }
+
+    public Antri getAntri(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        try{
+            String selectQuery = "SELECT * FROM antri";
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            Log.e("getKonsul", ""+cursor.getCount());
+            if(cursor.getCount() > 0) {
+                Antri data = new Antri();
+                cursor.moveToFirst();
+                data.setId          (cursor.getInt(cursor.getColumnIndex("id")));
+                data.setQuee_text      (cursor.getString(cursor.getColumnIndex("quee_text")));
+                data.setQueue_date        (cursor.getString(cursor.getColumnIndex("queue_date")));
+                data.setStatus       (cursor.getString(cursor.getColumnIndex("status")));
+                return data;
+            }else {
+                return null;
+            }
+        }finally {
+            db.close();
+        }
+
+    }
+
+    public boolean cekAntri(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM antri";
+        Cursor c = db.rawQuery(query,null);
+        if (c != null && c.getCount() > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean deleteAllAntri(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int num = db.delete("antri", "1", null);
+        if (num > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
+
 
 //==========KONSUL==========
     public boolean insertKonsul(Konsul konsul){

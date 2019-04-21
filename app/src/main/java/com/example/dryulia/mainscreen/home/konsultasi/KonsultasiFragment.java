@@ -74,8 +74,13 @@ public class KonsultasiFragment extends Fragment {
         db = new DatabaseHelper(getContext());
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         //cek apakah sudah konsult apa belum
+        if (db.cekAntri()){
+            setStep(3);
+            return;
+        }
         if (db.cekKonsul()){
             setStep(2);
+            return;
         }else {
             transaction.replace(R.id.content_konsultasi, pilihlayananFragment).commit();
         }

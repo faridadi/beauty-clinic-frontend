@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ import com.example.dryulia.R;
 import com.example.dryulia.auth.LoginActivity;
 import com.example.dryulia.database.DatabaseHelper;
 import com.example.dryulia.helper.ConnectivityHelper;
+import com.example.dryulia.model.Antri;
 import com.example.dryulia.model.Konsul;
 import com.example.dryulia.model.User;
 import com.google.zxing.BarcodeFormat;
@@ -64,11 +66,15 @@ public class BookingFragment extends Fragment {
     CardView a, kondisiUmum;
     DatabaseHelper db;
     String url;
+    String urlBok;
     String appkey;
     String token;
     String fullurl;
+    String bokingurl;
     String tmp;
+    String barcode;
     User user;
+    Handler h;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,8 +101,9 @@ public class BookingFragment extends Fragment {
         //memilih data untuk dimasukkan di modal dialog
         imgAnamnesa = view.findViewById(R.id.booking_anamnesa);
         kondisiUmum = view.findViewById(R.id.cv_booking_kondisi_umum);
-
-        url = "http://192.168.100.98/klinik_kecantikan/core/consultation/order";
+        barcode = "";
+        url =       "http://192.168.100.98/klinik_kecantikan/core/consultation/order";
+        urlBok =    "http://192.168.100.98/klinik_kecantikan/core/consultation/get_queue";
         appkey = "2nqcKDagPLlTk9ibHOQUIG0l5bSKsloZ6JSjrshFcV8xYLGRixtuEKVGlIBGv04LRpnQrOcxvYg";
         token = "6FST6Pz39hPeTtHIYvDEGuMAbLWpuFoQ3uLbw3nLUTIjDJcz53nnmEjepGtGaY9V1PLfbY2q0TY";
         fullurl = "";
@@ -129,17 +136,34 @@ public class BookingFragment extends Fragment {
             user = db.getUser();
             token = user.getToken_acc();
             fullurl = url+"?appkey="+appkey+"&token="+token;
+            bokingurl = urlBok+"?appkey="+appkey+"&token="+token;
         }
 
         //cek data konsul di database jika tidak ada koneksi atau offline
         if (db.cekKonsul()){
             Konsul ko = db.getKonsul();
+            barcode = ko.getBarcode();
             Bitmap bitmap = generateBarcode(ko.getBarcode(),200,200);
             barcodeImage.setImageBitmap(bitmap);
             barcodeText.setText(ko.getBarcode());
             barcodeText.setVisibility(View.VISIBLE);
             btnCancel.setVisibility(View.INVISIBLE);
             btnNext.setVisibility(View.INVISIBLE);
+
+            h = new Handler();
+            h.postDelayed(new Runnable()
+            {
+                private long time = 0;
+
+                @Override
+                public void run()
+                {
+                    checkBoking();
+                    time += 1000;
+                    Log.d("TimerExample", "Going for... " + time);
+                    h.postDelayed(this, 5000);
+                }
+            }, 5000);
         }
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -403,6 +427,38 @@ public class BookingFragment extends Fragment {
     }
 
     //fungsi untuk mengatur permission di setting
+
+    private void checkBoking(){
+        final boolean cek = false;
+        AndroidNetworking.upload(bokingurl)
+                .addMultipartParameter("booking_code", "BOOK4LTM04201920PUYS")//barcode.toString())
+                .build().getAsJSONObject(new JSONObjectRequestListener() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject data = response.getJSONObject("data");
+                    String quee_text = data.getString("quee_text");
+                    String quee_date = data.getString("queue_date");
+                    String status = data.getString("status");
+                    //berhasil da[at Waiting
+                    if (status.equals("Waiting")){
+                        Antri antri = new Antri(quee_text, quee_date,status);
+                        db.insertAntri(antri);
+                        KonsultasiFragment.getInstance().setStep(3);
+                        h.removeCallbacksAndMessages(null);
+                        return;
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onError(ANError anError) {
+                Log.d("error", anError.toString());
+            }
+        });
+    }
+
     public void showsettings() {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);

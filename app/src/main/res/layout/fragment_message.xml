@@ -145,7 +145,7 @@
                                     android:src="@drawable/ic_information"/>
                                 <TextView
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:text="Informasi Umum"
                                     android:layout_marginLeft="@dimen/_15sdp"
                                     android:layout_gravity="center"

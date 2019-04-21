@@ -1,13 +1,16 @@
 package com.example.dryulia.mainscreen.home.konsultasi;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +20,15 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dryulia.R;
 import com.example.dryulia.model.Konsul;
 
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class PilihLayananFragment extends Fragment {
 
@@ -32,6 +39,7 @@ public class PilihLayananFragment extends Fragment {
     private TextView tvTanggal;
     Calendar c;
     DatePickerDialog dpd;
+    boolean date = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +57,7 @@ public class PilihLayananFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+        date = false;
         btnSimpan = view.findViewById(R.id.btn_simpan_pilihLayanan);
         edtKeluhan = view.findViewById(R.id.edt_keluhan);
         edtAreaKeluhan = view.findViewById(R.id.edt_area_keluhan);
@@ -59,14 +67,17 @@ public class PilihLayananFragment extends Fragment {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                KonsultasiFragment.getInstance().getsKonsul().setKeluhan(edtKeluhan.getText().toString());
-                KonsultasiFragment.getInstance().getsKonsul().setArea(edtAreaKeluhan.getText().toString());
-                KonsultasiFragment.getInstance().getsKonsul().setLama(edtLamaKeluhan.getText().toString());
-                KonsultasiFragment.getInstance().getsKonsul().setRiwayatobat(edtRiwayatCream.getText().toString());
-                KonsultasiFragment.getInstance().getsKonsul().setRiwayatPerawatan(edtRiwayatPerawatan.getText().toString());
-                KonsultasiFragment.getInstance().getsKonsul().setDate("tanggal");
-                //set data intance untuk interface data antar fragment konusltasi
-                KonsultasiFragment.getInstance().setStep(1);
+                if (chekForm()){
+                    KonsultasiFragment.getInstance().getsKonsul().setKeluhan(edtKeluhan.getText().toString());
+                    KonsultasiFragment.getInstance().getsKonsul().setArea(edtAreaKeluhan.getText().toString());
+                    KonsultasiFragment.getInstance().getsKonsul().setLama(edtLamaKeluhan.getText().toString());
+                    KonsultasiFragment.getInstance().getsKonsul().setRiwayatobat(edtRiwayatCream.getText().toString());
+                    KonsultasiFragment.getInstance().getsKonsul().setRiwayatPerawatan(edtRiwayatPerawatan.getText().toString());
+                    KonsultasiFragment.getInstance().getsKonsul().setDate(tvTanggal.getText().toString());
+                    KonsultasiFragment.getInstance().setStep(1);
+                }else {
+                    Toast.makeText(getActivity(), "Data kosong silahkan diisi dulu", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         imgTanggal = view.findViewById(R.id.ic_calendar);
@@ -75,18 +86,24 @@ public class PilihLayananFragment extends Fragment {
         imgTanggal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                c = Calendar.getInstance();
-                int day = c.get(Calendar.DAY_OF_MONTH);
-                int month = c.get(Calendar.MONTH);
-                int year = c.get(Calendar.YEAR);
+                final Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
-                        tvTanggal.setText(mDay + "/"+(mMonth+1)+"/"+mYear);
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        if ((month+1)<10){
+                            tvTanggal.setText(year+"-0"+(month+1)+"-"+day);
+                        }else {
+                            tvTanggal.setText(year+"-"+(month+1)+"-"+day);
+                        }
+                        date = true;
                     }
-                },day, month, year);
+                }, year, month, day);
                 dpd.show();
+
             }
         });
     }
@@ -100,5 +117,26 @@ public class PilihLayananFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
-
+    private boolean isEmpty(EditText text){
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+    private boolean chekForm(){
+        if (isEmpty(edtKeluhan)){
+            return false;
+        }if (isEmpty(edtAreaKeluhan)){
+            return false;
+        }if(isEmpty(edtLamaKeluhan)){
+            return false;
+        }if (isEmpty(edtRiwayatCream)){
+            return false;
+        }if (isEmpty(edtRiwayatPerawatan)){
+            return false;
+        }if (!date){
+            return false;
+        }
+        return true;
+    }
 }
+
+

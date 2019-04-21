@@ -8,14 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.dryulia.R;
 import com.example.dryulia.database.DatabaseHelper;
+import com.example.dryulia.helper.ConnectivityHelper;
 import com.example.dryulia.mainscreen.MainScreenActivity;
 import com.example.dryulia.model.User;
 
@@ -24,6 +25,7 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText nama, uname, upass, email, phone, address;
+    TextView login;
     Button regis;
     DatabaseHelper db;
     String url, apikey, nameKey;
@@ -44,6 +46,15 @@ public class RegisterActivity extends AppCompatActivity {
         phone = (EditText) findViewById(R.id.register_Notelepon);
         address = (EditText) findViewById(R.id.register_address);
         regis = (Button) findViewById(R.id.button_register);
+        login = (TextView) findViewById(R.id.button_login);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+            }
+        });
 
         nama.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -53,10 +64,15 @@ public class RegisterActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         regis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(chekForm()) {
+                    if (!ConnectivityHelper.isConnectedToNetwork(getApplicationContext())){
+                        Toast.makeText(RegisterActivity.this, "Anda belum terhubung dengan internet", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     AndroidNetworking.post(url)
                             .setPriority(Priority.MEDIUM)
                             .addBodyParameter("name", nama.getText().toString())
@@ -107,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onError(ANError error) {
                                     //Handle Error
                                     Log.d("TAG", "onError: Failed" + error); //untuk log pada onerror
-                                    Toast.makeText(getApplicationContext(), "Data gagal ditambahkan", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Register gagal silahkan cob lagi", Toast.LENGTH_SHORT).show();
                                     //memunculkan Toast saat data gagal ditambahkan
                                 }
                             });
@@ -124,23 +140,25 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean chekForm(){
-        if (isEmpty(nama) && isEmpty(uname) && isEmpty(upass) && isEmpty(email) && isEmpty(phone) && isEmpty(address)){
             if (isEmpty(nama)){
                 nama.setError("nama");
+                return false;
             }if (isEmpty(uname)){
                 uname.setError("uname");
+                return false;
             }if (isEmpty(upass)){
                 upass.setError("upass");
+                return false;
             }if (isEmpty(email)){
                 email.setError("email");
+                return false;
             }if (isEmpty(phone)){
                 phone.setError("phone");
+                return false;
             }if (isEmpty(address)){
-                phone.setError("phone");
+                address.setError("phone");
+                return false;
             }
-            return false;
-        }else {
             return true;
-        }
     }
 }
