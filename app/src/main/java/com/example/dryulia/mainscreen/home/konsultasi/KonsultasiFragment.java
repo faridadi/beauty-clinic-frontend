@@ -84,12 +84,14 @@ public class KonsultasiFragment extends Fragment {
         }else {
             transaction.replace(R.id.content_konsultasi, pilihlayananFragment).commit();
         }
+        /*
         stepView.setOnStepClickListener(new StepView.OnStepClickListener() {
             @Override
             public void onStepClick(int step) {
                 setStep(step);
             }
         });
+        */
     }
 
     public void setStep(int step){

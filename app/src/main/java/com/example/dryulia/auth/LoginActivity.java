@@ -1,5 +1,4 @@
 package com.example.dryulia.auth;
-
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
@@ -20,12 +18,10 @@ import com.example.dryulia.database.DatabaseHelper;
 import com.example.dryulia.helper.ConnectivityHelper;
 import com.example.dryulia.mainscreen.MainScreenActivity;
 import com.example.dryulia.model.User;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
-
     EditText uname;
     EditText pass;
     Button login;
@@ -69,6 +65,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Password Kosong silahkan isi", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
                 if (ConnectivityHelper.isConnectedToNetwork(getApplicationContext())) {
                     AndroidNetworking.post(url)
                             .setPriority(Priority.MEDIUM)
@@ -106,11 +104,11 @@ public class LoginActivity extends AppCompatActivity {
 
                                             return;
                                         }else{
-                                            Toast.makeText(LoginActivity.this, "gagal login", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginActivity.this, "Password dan username tidak cocok", Toast.LENGTH_SHORT).show();
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
-                                        Toast.makeText(LoginActivity.this, "Gagal Login", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Koneksi Error", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                                 @Override
@@ -124,6 +122,14 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "Anda Belum Terhubung Internet", Toast.LENGTH_SHORT).show();
                 }
+
+                /*
+                db.insertUser(new User("1", uname.getText().toString(), "089123432432", "emial@email.email", "Malang", uname.getText().toString(), "", ""));
+                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+                */
             }
         });
 

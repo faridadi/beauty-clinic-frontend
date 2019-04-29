@@ -26,10 +26,11 @@
                     android:id="@+id/button_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:text="Login"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/_15ssp"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/_20ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/colorYellow"
                     />
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -165,7 +166,6 @@
                             />
                     </android.support.v7.widget.CardView>
                 </android.support.v7.widget.CardView>
-
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -184,7 +184,6 @@
                         android:layout_margin="@dimen/_2sdp"
                         android:backgroundTint="@color/colorBackground"
                         >
-
                         <EditText
                             android:id="@+id/register_email"
                             android:layout_width="match_parent"
@@ -218,7 +217,6 @@
                         android:layout_margin="@dimen/_2sdp"
                         android:backgroundTint="@color/colorBackground"
                         >
-
                         <EditText
                             android:id="@+id/register_Notelepon"
                             android:layout_width="match_parent"
@@ -244,17 +242,6 @@
                     android:text="Register"
                     android:textSize="@dimen/_25ssp"
                     android:background="@drawable/button_register"/>
-
-
             </LinearLayout>
-
-
         </ScrollView>
-
-
-
-
-
-
-
 </LinearLayout>
